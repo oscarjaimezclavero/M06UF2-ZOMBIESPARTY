@@ -1,0 +1,46 @@
+#inputdiv{
+    border: 5px solid salmon;
+    height: 1000px;
+    width: 15%;
+    float: left;
+}
+
+#gamediv{
+    border: 5px solid green;
+    height: 1000px;
+    width: 60%;
+    float: left;
+}
+
+#statsdiv{
+    border: 5px solid aqua;
+    height: 1000px;
+    width: 20%;
+    float: left;
+}
+
+#textdivinput{
+    position: relative;
+    margin-left: 7%;
+    margin-right: 7%;
+    background-color: white;
+}
+
+img{
+    margin-left: 20%;
+}
+
+body{
+    background-image: url(background.jpg);
+    background-size: 100%;
+}
+
+#titulo{
+    margin-left: 50%;
+}
+
+#titulo2{
+    margin-left: 30%;
+    background-color: white;
+    width: 200px;
+}

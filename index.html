@@ -4,17 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div id="inputdiv"> 
-        <h1> input div</h1> 
-    
+        <div> <img src="https://www.dafont.com/forum/attach/orig/8/5/8579.png">  </div>
+        <div id="inputdiv"> 
+            
+            <div id="textdivinput">
+                <h2 id="dimeelvalorh1"> Dime el valor del tablero</h2> 
+
+                <form onsubmit="return revisardato();">
+
+                <input type="text" value="" id="valorusuario"> 
+                <input type="submit" value="enviar">
+
+                </form>
+            </div>
+
+        </div>
+
+        <div id="gamediv"> 
+
+            <div id="titulo"><h1> div del juego</h1></div>
         
-    </div>
-
-    <div id="gamediv">  <h1> juego div</h1> </div>
-    <div id="statsdiv"> <h1> stats div</h1> </div>
-
+        </div>
+        <div id="statsdiv"> <h1 id="titulo2">div de los stats</h1> </div>
     <script src="main.js"></script>
 </body>
 </html>
