@@ -1,0 +1,62 @@
+
+
+3 clases: zombis,estrellas recompensas(3 arrays: doble puntuacion, 
+					eliminar mitad zombis
+					vida extra),
+ estrellas: nombre de filas x columnas, ocupa 1 casilla
+ zombis: 1 casilla, 25% de cuadros
+
+ recompensas: 25% random {
+ doblar puntuación: 1 casilla
+ eliminar mitad de zombies: 2 casillas
+ vida extra: 3 casillas
+ }
+
+
+
+
+
+¿como poner las casillas random? math.random X, Y
+como rellenar random de recompensas? 
+	- calcular 0,25 casillas totales
+	- math random que objeto que poner
+	- math random que elija dirección ir (vertical o horizontal), 
+	- guardar posiciones de recompensas en array( [x1y2],[x1y3] )
+	- function para generar recompensas utilizar switch case comprobar todas las combinaciones posibles donde generar objeto, independientemente de la cantidad de huecos disponibles
+	- crear button onclick usuario introduce posición
+	- variable vidas comienza con 3
+	- variable puntuacion comienza con 0, condición nunca puede ser negativa
+	- if seleccionas zombie puntuación -100, vida -1
+	- if vida == 0 exit
+	- if estrellas encontradas == estrellas totales win
+	- Estrellas posición Random
+	- if encuentras estrella +200 puntos 
+	- if encuentras cesped +50
+	- button para abandonar, reset all con prompt inicial
+	- crear contadores casillas por destapar, casillas zombies etc
+	
+
+Dividir pagina en 
+	
+
+
+
+
+
+Ampliación( 
+	- para introducir posición usuario haga clic en la posición deseada a destapar, por lo tanto cada posición tendrá un boton
+	- animaciones para los cuadros
+	)
+
+
+Objetivo 1(
+	- 1 div en el 1 inputs para numero de casillas, cuando envias input crear los dos otros divs
+	- 2 div el tablero
+	- 3 div en el contador
+	- crear if que es mas de 5 y menos de 20)
+
+Objetivo 2(
+	- crear objeto tablero, con recompesas, zombis etc.
+	- repartir las letras, inicialment todos son cesped
+	- un console.log para descubrir que hay en una posición)
+	
