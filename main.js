@@ -1,4 +1,8 @@
+window.onload = function(){
 
+    let mida = prompt("mida del tauler");
+    
+}
 function revisardato(){
     var datousuario = document.getElementById('valorusuario').value;
     
