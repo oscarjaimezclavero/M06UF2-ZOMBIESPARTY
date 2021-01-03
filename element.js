@@ -24,9 +24,10 @@ Element.prototype.cargarImagen = function(tipo){
         case 'v':
             document.getElementById("prueba1").src="img/vidaextra.png";
             break;
+        default:
+            document.getElementById("prueba1").src="img/cesped.png";
     }
 }
-
 
 
 //Objeto Hijo
@@ -66,6 +67,7 @@ var VidaExtra = function (posicion){
     Recompensa.apply(this, arguments);
     var tipo = v;
 }
+
 //EXTEND RECOMPENSA
 DoblePuntuacion.prototype = Object.create(Recompensa.prototype);
 DoblePuntuacion.prototype.constructor = DoblePuntuacion;
@@ -75,4 +77,4 @@ VidaExtra.prototype = Object.create(Recompensa.prototype);
 VidaExtra.prototype.constructor = VidaExtra;
 
 //CREACION OBJETOS
-//var zombie = new Zombie(posicion); --> Ejemplo
+var zombie = new Zombie();
