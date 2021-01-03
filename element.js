@@ -10,6 +10,10 @@ var Element = function (posicion){
 //Objeto Hijo
 var Zombie = function (posicion){
     Element.apply(this, arguments);
+    var cargarImagen = function () {
+        var imagen = new Image();
+        imagen.src = '/img/zombie.png';
+    }
 }
 
 var Recompensa = function (posicion){
