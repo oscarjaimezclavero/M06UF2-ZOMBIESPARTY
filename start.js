@@ -27,3 +27,5 @@ function crearTabla(datousuario){
     tbl.appendChild(tblBody);
     tbl.setAttribute("border", "2");
 }
+
+
