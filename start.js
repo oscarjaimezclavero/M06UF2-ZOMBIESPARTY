@@ -13,8 +13,7 @@ function revisardato(){
         alert("dato incorrecto");
         
     }
-    else crearTabla(datousuario);
-
+    else Tauler.inicialitzador(datousuario);
 }
 
 
@@ -28,11 +27,13 @@ function crearTabla(datousuario){
 
     var tbl = document.getElementById("tabla");
     var tblBody = document.createElement("tbody");
+    var valor = 0;
     for (var i = 0; i < datousuario; i++) {
         var fila = document.createElement("tr");
-        for (var j = 0; j < datousuario-1; j++) {
+        for (var j = 0; j < datousuario; j++) {
             var celda = document.createElement("td");
-            var textoCelda = document.createTextNode(i+"-"+j);
+            var textoCelda = document.createTextNode(valor);
+            valor ++;
             celda.appendChild(textoCelda);
             fila.appendChild(celda);           
         }
