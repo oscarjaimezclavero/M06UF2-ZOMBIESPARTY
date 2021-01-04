@@ -1,10 +1,12 @@
 
 //Objeto Padre
-var Tauler = function (){
+var Tauler = function (datousuario){
     //this.posicion = posicion;  // con esto se tendria acceso externo
     // var posicion = posicion --> con esto seria privado
     //var descubierto = Boolean(False); // tambien podria ser  "var descubierto = False;"
-    function inicialitzador(datousuario){
+    var casillas = datousuario;
+
+    this.inicialitzador = function(){
         
         // Hace aparecer los 2 div al tener un valor valido
         document.getElementById("gamediv").style.display = "block";
@@ -13,9 +15,10 @@ var Tauler = function (){
         var tbl = document.getElementById("tabla");
         var tblBody = document.createElement("tbody");
         var valor = 1;
-        for (var i = 0; i < datousuario; i++) {
+
+        for (var i = 0; i < casillas; i++) {
             var fila = document.createElement("tr");
-            for (var j = 0; j < datousuario; j++) {
+            for (var j = 0; j < casillas; j++) {
                 var celda = document.createElement("td");
                 var textoCelda = document.createTextNode(valor);
                 valor ++;
