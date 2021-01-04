@@ -33,6 +33,7 @@ let partida = {
             let estreall = new estrella();
             this.estrelles.push(estrella);
             estrelles_creades++;
+            this.setPosicio(i,j);
         }
     },
 }
@@ -42,3 +43,12 @@ let partida = {
 []
 []
 []
+
+
+getPosicio: function(x,y){
+    return tauler[x],[y];
+},
+
+setPosicio: function(x,y){
+    tauler[x],[y];
+}
