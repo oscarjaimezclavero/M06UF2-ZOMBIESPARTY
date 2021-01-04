@@ -1,3 +1,12 @@
+#imagenTitulo{
+    justify-content: center;
+}
+
+img{
+    width:80%;
+    justify-content: center;
+}
+
 #inputdiv{
     border: 5px solid salmon;
     height: 1000px;
@@ -10,6 +19,7 @@
     height: 1000px;
     width: 60%;
     float: left;
+    padding-left: 20px;
 }
 
 #statsdiv{
@@ -26,9 +36,7 @@
     background-color: white;
 }
 
-img{
-    margin-left: 20%;
-}
+
 
 body{
     background-image: url(background.jpg);
@@ -44,3 +52,9 @@ body{
     background-color: white;
     width: 200px;
 }
+
+#tabla{
+    
+    margin:auto;
+}
+

@@ -15,23 +15,24 @@ var Tauler = function (datousuario){
         var tbl = document.getElementById("tabla");
         var tblBody = document.createElement("tbody");
         var valor = 1;
-
+        //var imagenBasica = ;
         for (var i = 0; i < casillas; i++) {
             var fila = document.createElement("tr");
             for (var j = 0; j < casillas; j++) {
                 var celda = document.createElement("td");
-                var textoCelda = document.createTextNode(valor);
-                valor ++;
+                var imagenCelda = document.createElement("img");
+                //var textoCelda = document.createTextNode(valor);
                 celda.setAttribute("id", valor);
-                celda.appendChild(textoCelda);
+                valor ++;
+                imagenCelda.setAttribute("src", "/img/cespedoculto.jpg")
+                celda.appendChild(imagenCelda)
+                //celda.appendChild(textoCelda);
                 fila.appendChild(celda);           
             }
             tblBody.appendChild(fila);
         }
         tbl.appendChild(tblBody);
         tbl.setAttribute("border", "2");
-    
-    
     }
 
     function veureImatge(){
@@ -39,7 +40,7 @@ var Tauler = function (datousuario){
     }
 }
 
-// Element.prototype.cargarImagen = function(tipo){
+// Tauler.prototype.cargarImagen = function(tipo){
 //     switch (tipo){
 //         case 'z':
 //             document.getElementById("prueba1").src="img/zombie.png";
@@ -76,24 +77,25 @@ var Tauler = function (datousuario){
 
 // //Objeto Hijo
 // var Zombie = function (posicion){
-//     Element.apply(this, arguments);
+//     Tauler.apply(this, arguments);
 //     var tipo = z;
+
 // }
 
 // var Recompensa = function (posicion){
-//     Element.apply(this, arguments);
+//     Tauler.apply(this, arguments);
 // }
 
 // var Estrella = function (posicion){
-//     Element.apply(this, arguments);
+//     Tauler.apply(this, arguments);
 //     var tipo = e;
 // }
 // //EXTEND ELEMENT
-// Zombie.prototype = Object.create(Element.prototype);
+// Zombie.prototype = Object.create(Tauler.prototype);
 // Zombie.prototype.constructor = Zombie;
-// Recompensa.prototype = Object.create(Element.prototype);
+// Recompensa.prototype = Object.create(Tauler.prototype);
 // Recompensa.prototype.constructor = Recompensa;
-// Estrella.prototype = Object.create(Element.prototype);
+// Estrella.prototype = Object.create(Tauler.prototype);
 // Estrella.prototype.constructor = Estrella;
 
 // //Objeto Hijo Recompensa
