@@ -33,6 +33,18 @@ var Tauler = function (datousuario){
         }
         tbl.appendChild(tblBody);
         tbl.setAttribute("border", "2");
+
+        function escogerCasilla(){
+            var totalCasillas = Math.pow(casillas, 2);
+            Math.random(totalCasillas - 1);
+            var cantidad = 0.25 * totalCasillas;
+
+        }
+
+        function cambiarLetra(){
+
+        }
+
     }
 
     function veureImatge(valor){
@@ -40,6 +52,8 @@ var Tauler = function (datousuario){
         var posicion_taulervisible = document.getElementById(valor);
         String.replace(posicion_taulervisible, posicion_tauleroculta);
     }
+
+
 }
 
 
