@@ -5,7 +5,9 @@ var Tauler = function (datousuario){
     // var posicion = posicion --> con esto seria privado
     //var descubierto = Boolean(False); // tambien podria ser  "var descubierto = False;"
     var casillas = datousuario;
-
+    var contadorZombi=0;
+    var contadorRecompensa=0;
+    var contadorEstrella=0;
 
     this.inicialitzador = function(){
         
@@ -34,11 +36,39 @@ var Tauler = function (datousuario){
         tbl.appendChild(tblBody);
         tbl.setAttribute("border", "2");
 
+
+
         function escogerCasilla(){
             var totalCasillas = Math.pow(casillas, 2);
-            Math.random(totalCasillas - 1);
-            var cantidad = 0.25 * totalCasillas;
+            var casillaEscogida;
 
+            function casillaRandom() { 
+                casillaEscogida = Math.floor(Math.random()*(totalCasillas+1)-1) + 1;             
+            }
+            
+            while(casillaEscogida != 'g'){
+                casillaRandom();
+            } 
+            escogerObjeto(casillaEscogida); 
+            //var cantidad = 0.25 * totalCasillas;
+        }
+
+
+        function escogerObjeto(casilla){
+             if(contadorRecompensa==0){
+                vidaextra;
+                contadorRecompensa=contadorRecompensa+3;
+             }else if(contadorRecompesa==3){
+                 mitadzombies;
+                 contadorRecompensa=contadorRecompensa+2;
+             }else if(contadorRecompensa==5){
+                doblarpuntuacion;
+                contadorRecompensa=contadorRecompensa+1;
+             }
+
+            while(cantidad > contadorRecompensa){
+                
+            }
         }
 
         function cambiarLetra(){
