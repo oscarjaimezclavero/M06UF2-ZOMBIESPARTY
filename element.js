@@ -20,13 +20,13 @@ var Tauler = function (datousuario){
             var fila = document.createElement("tr");
             for (var j = 0; j < casillas; j++) {
                 var celda = document.createElement("td");
-                var imagenCelda = document.createElement("img");
-                //var textoCelda = document.createTextNode(valor);
+                //var imagenCelda = document.createElement("img");
+                var textoCelda = document.createTextNode("g");
                 celda.setAttribute("id", valor);
                 valor ++;
-                imagenCelda.setAttribute("src", "/img/cespedoculto.jpg")
-                celda.appendChild(imagenCelda)
-                //celda.appendChild(textoCelda);
+                //imagenCelda.setAttribute("src", "/img/cespedoculto.jpg")
+                //celda.appendChild(imagenCelda)
+                celda.appendChild(textoCelda);
                 fila.appendChild(celda);           
             }
             tblBody.appendChild(fila);
@@ -35,10 +35,13 @@ var Tauler = function (datousuario){
         tbl.setAttribute("border", "2");
     }
 
-    function veureImatge(){
-
+    function veureImatge(valor){
+        var posicion_tauleroculta = taulerrellenado.getElementById(valor);
+        var posicion_taulervisible = document.getElementById(valor);
+        String.replace(posicion_taulervisible, posicion_tauleroculta);
     }
 }
+
 
 // Tauler.prototype.cargarImagen = function(tipo){
 //     switch (tipo){
