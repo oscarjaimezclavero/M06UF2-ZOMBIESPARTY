@@ -6,6 +6,7 @@ var Tauler = function (datousuario){
     //var descubierto = Boolean(False); // tambien podria ser  "var descubierto = False;"
     var casillas = datousuario;
 
+
     this.inicialitzador = function(){
         
         // Hace aparecer los 2 div al tener un valor valido
@@ -15,13 +16,12 @@ var Tauler = function (datousuario){
         var tbl = document.getElementById("tabla");
         var tblBody = document.createElement("tbody");
         var valor = 1;
-        //var imagenBasica = ;
         for (var i = 0; i < casillas; i++) {
             var fila = document.createElement("tr");
             for (var j = 0; j < casillas; j++) {
                 var celda = document.createElement("td");
                 //var imagenCelda = document.createElement("img");
-                var textoCelda = document.createTextNode("g");
+                var textoCelda = document.createTextNode(valor);
                 celda.setAttribute("id", valor);
                 valor ++;
                 //imagenCelda.setAttribute("src", "/img/cespedoculto.jpg")
