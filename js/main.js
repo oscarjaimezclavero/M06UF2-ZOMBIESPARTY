@@ -4,6 +4,7 @@ window.onload = function() {
     document.getElementById("statsdiv").style.display = "none";
     
     
+    
 };
 
 var datousuario;

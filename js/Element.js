@@ -22,13 +22,13 @@ var Tauler = function (datousuario){
             var fila = document.createElement("tr");
             for (var j = 0; j < casillas; j++) {
                 var celda = document.createElement("td");
-                //var imagenCelda = document.createElement("img");
-                var textoCelda = document.createTextNode(valor);
+                var imagenCelda = document.createElement("img");
+                //var textoCelda = document.createTextNode(valor);
                 celda.setAttribute("id", valor);
                 valor ++;
-                //imagenCelda.setAttribute("src", "/img/cespedoculto.jpg")
-                //celda.appendChild(imagenCelda)
-                celda.appendChild(textoCelda);
+                imagenCelda.setAttribute("src", "/img/cespedoculto.jpg")
+                celda.appendChild(imagenCelda)
+                //celda.appendChild(textoCelda);
                 fila.appendChild(celda);           
             }
             tblBody.appendChild(fila);
@@ -57,17 +57,20 @@ var Tauler = function (datousuario){
         function escogerObjeto(casilla){
              if(contadorRecompensa==0){
                 vidaextra;
+                casillaEscogida = "v";
                 contadorRecompensa=contadorRecompensa+3;
              }else if(contadorRecompesa==3){
                  mitadzombies;
+                 casillaEscogida = "m";
                  contadorRecompensa=contadorRecompensa+2;
              }else if(contadorRecompensa==5){
                 doblarpuntuacion;
+                casillaEscogida = "d";
                 contadorRecompensa=contadorRecompensa+1;
              }
 
             while(cantidad > contadorRecompensa){
-                
+
             }
         }
 
@@ -109,65 +112,6 @@ var Tauler = function (datousuario){
 //     }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //Objeto Hijo
-// var Zombie = function (posicion){
-//     Tauler.apply(this, arguments);
-//     var tipo = z;
-
-// }
-
-// var Recompensa = function (posicion){
-//     Tauler.apply(this, arguments);
-// }
-
-// var Estrella = function (posicion){
-//     Tauler.apply(this, arguments);
-//     var tipo = e;
-// }
-// //EXTEND ELEMENT
-// Zombie.prototype = Object.create(Tauler.prototype);
-// Zombie.prototype.constructor = Zombie;
-// Recompensa.prototype = Object.create(Tauler.prototype);
-// Recompensa.prototype.constructor = Recompensa;
-// Estrella.prototype = Object.create(Tauler.prototype);
-// Estrella.prototype.constructor = Estrella;
-
-// //Objeto Hijo Recompensa
-// var DoblePuntuacion = function (posicion){
-//     Recompensa.apply(this, arguments);
-//     var tipo = d;
-// }
-
-// var MitadZombies = function (posicion){
-//     Recompensa.apply(this, arguments);
-//     var tipo = m;
-// }
-
-// var VidaExtra = function (posicion){
-//     Recompensa.apply(this, arguments);
-//     var tipo = v;
-// }
-
-// //EXTEND RECOMPENSA
-// DoblePuntuacion.prototype = Object.create(Recompensa.prototype);
-// DoblePuntuacion.prototype.constructor = DoblePuntuacion;
-// MitadZombies.prototype = Object.create(Recompensa.prototype);
-// MitadZombies.prototype.constructor = MitadZombies;
-// VidaExtra.prototype = Object.create(Recompensa.prototype);
-// VidaExtra.prototype.constructor = VidaExtra;
 
 // //CREACION OBJETOS
 // var zombie = new Zombie();
