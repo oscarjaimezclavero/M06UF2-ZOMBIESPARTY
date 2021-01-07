@@ -65,8 +65,8 @@ function limpiarCasillas(id) {
 
 //revisar
 function abandonar(){
-    partida.abandonadas+=1;
-    localStorage.setItem("abandonadas", partida.abandonadas);
+    localStorage.abandonadas = Number(localStorage.abandonadas) + 1;
+    this.estadisticas();
     reiniciar();
 }
 //revisar
