@@ -14,6 +14,7 @@ let partida = {
     // Stats
     ganadas:0,
     perdidas:0,
+    abandonadas:0,
     vidas: 3,
     puntos_totales: 0,
     estrellas_creadas:0, 
@@ -24,6 +25,7 @@ let partida = {
     pdobles_encontrados: 0, 
     vidaextra_encontrados: 0, 
     mitadzombies_encontrados: 0,
+
 
     // Nos llenara la tabla con cesped y segun la medida que nos diga el usuario
     inicialitzar_tauler: function() {
@@ -63,14 +65,14 @@ let partida = {
 
         //stats partidas ganadas:
         if(localStorage.getItem("ganadas") == null){
-            ganadas = localStorage.setItem("ganadas", 0);
+            this.ganadas = localStorage.setItem("ganadas", 0);
         }
-            else{guanyades = localStorage.getItem("guanyades");}      
+            else{this.ganadas = localStorage.getItem("ganadas");}      
 
         if (localStorage.getItem("perdidas") == null) {
-            perdidas = localStorage.setItem("perdidas", 0);
+            this.perdidas = localStorage.setItem("perdidas", 0);
         }
-            else{perdudes = localStorage.getItem("perdudes");}
+            else{this.perdidas = localStorage.getItem("perdidas");}
 
         //estadistiques.innerHTML = "ganadas: " + ganadas + "<br> perdidas: " + perdidas;
 
@@ -185,6 +187,8 @@ let partida = {
                     alert("¡GAME OVER!");
                     setTimeout(function() {
                         reiniciar();
+                        this.perdidas++;
+                        localStorage.setItem("perdidas", this.perdidas);
                     }, 1000);
                 }
 
@@ -200,6 +204,8 @@ let partida = {
                     alert("¡You Win!");
                     setTimeout(function() {
                         reiniciar();
+                        this.ganadas++;
+                        localStorage.setItem("ganadas", this.ganadas);
                     }, 1000);        
                 }
                 if (partida.casillaEscogidas<2){
@@ -465,11 +471,11 @@ let partida = {
         ver += "</br>";
         ver += "ESTADISTICAS:";
         ver += "</br>";
-        ver += "Partidas ganadas: ";
+        ver += "Partidas ganadas: " + this.ganadas;
         ver += "</br>";
-        ver += "Partidas perdidas: ";
+        ver += "Partidas perdidas: " + this.perdidas;
         ver += "</br>";
-        ver += "partidas abandonadas: ";
+        ver += "partidas abandonadas: " + this.abandonadas;
 
         document.getElementById("stats").innerHTML = ver;
     },
