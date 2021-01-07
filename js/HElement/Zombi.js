@@ -1,7 +1,7 @@
-var Zombie = function (posicion){
-    //Herencia Element
+var Zombie = function (){
+    //Herencia Element.js
     Element.apply(this, arguments);
-    var tipo = z;
+
 
 // //EXTEND ELEMENT
 // Zombie.prototype = Object.create(Element.prototype);

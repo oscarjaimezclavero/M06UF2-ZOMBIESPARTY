@@ -83,8 +83,130 @@ let partida = {
     mirarLetra: function(tipo, valorX, valorY){
 
         this.inicialitzar_tauler;
-        partida.casillaEscogida
-    }
+        partida.casillaEscogida++;
+
+        switch (tipo.toUpperCase()) {
+            case "D":
+                valorX--;
+                valorY--;
+                for (let i = 0; i < partida.doblePuntos.length; i++) {
+
+                    if (valorX == partida.doblePuntos[i].x && valorY == partida.doblePuntos[i].y) { //Si encuentra en esa posicion que tiene las mismas coordenadas que yo suma las estadisticas
+
+                        partida.doblesPuntosEncontrados++;
+                        partida.doblePuntos[i].seleccionado = true;
+
+                    }
+                }
+
+                this.puntos = this.puntos * 2; //Dobla la puntuación
+                this.Estadisticas();
+
+                return '#fff';
+            case "MZ":
+
+
+                valorX--;
+                valorY--;
+                for (i = 0; i < partida.mitadZombie.length; i++) {
+                    var vE = partida.mitadZombie[i];
+                    if (valorX == vE.x && valorY == vE.y || //centro
+                        valorX - 1 == vE.x && valorY == vE.y || //izquierda
+                        valorX + 1 == vE.x && valorY == vE.y || //derecha
+                        valorX == vE.x && valorY - 1 == vE.y || //abajo
+                        valorX == vE.x && valorY + 1 == vE.y) { //arriba
+                        vE.casillas++;
+                        vE.seleccionado = true;
+                        if (vE.casillas == 2) {
+                            partida.mitadZombiesEncontrados++;
+                            partida.eliminarMitadZombies();
+                        }
+                    }
+                }
+
+                this.Estadisticas();
+
+                return '#e62e1b';
+            case "VE":
+                valorX--;
+                valorY--;
+                for (i = 0; i < partida.vidaExtra.length; i++) {
+                    var vE = partida.vidaExtra[i];
+                    if (valorX == vE.x && valorY == vE.y || //centro
+                        valorX - 1 == vE.x && valorY == vE.y || //izquierda
+                        valorX + 1 == vE.x && valorY == vE.y || //derecha
+                        valorX == vE.x && valorY - 1 == vE.y || //abajo
+                        valorX == vE.x && valorY + 1 == vE.y) { //arriba
+                        vE.casillas++;
+                        vE.seleccionado = true;
+                        if (vE.casillas == 3) {
+                            partida.vidas++;
+                            partida.vidasExtrasEncontradas++;
+                        }
+                    }
+                }
+                this.Estadisticas();
+
+                return '#7FED7E';
+            case "Z":
+
+                this.zombiesEncontrados++;
+                this.puntos = this.puntos - 100 < 0 ? 0 : this.puntos - 100; // ternaria para substituir el if
+
+                this.vidas--;
+                this.Estadisticas();
+
+                if (this.vidas == 0) {
+
+                    setTimeout(function() {
+
+                        alert("HAS PERDIDO!!!");
+
+                    }, 250);
+
+                    disableAll();
+
+                }
+
+                return '#93c572';
+            case "E":
+
+                partida.estrellasEncontradas++;
+                this.puntos += 200;
+
+                for (i = 0; i < partida.estrellas.length; i++) {
+
+                    if (partida.estrellas[i].valorX == valorX && partida.estrellas[i].valorY == valorY) {
+
+                        partida.estrellas[i].seleccionado = true;
+                    }
+                }
+                
+                if(partida.estrellasEncontradas==5){
+                    setTimeout(function() {
+
+                        alert("HAS GANADO!!!");
+
+                    }, 2000);        
+                }
+                if (partida.casillasSeleccionadas<2){
+                    console.log(partida.casillasSeleccionadas);
+                    this.RevelarTablero();
+                }
+
+                this.Estadisticas();
+
+                return '#57a639';
+            case "G":
+
+                this.puntos += 50;
+                this.Estadisticas();
+
+                return '#F09D61';
+
+        }
+        return '#fff';
+    },
 
 
 

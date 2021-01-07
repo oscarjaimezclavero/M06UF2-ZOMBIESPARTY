@@ -1,9 +1,9 @@
-let Estrella = function(posicion){
-    //Herencia Element
+let Estrella = function(){
+    //Herencia Element.js
     Element.apply(this, arguments);
-    var tipo = e;
 
-// //EXTEND RECOMPENSA
+
+// //EXTEND ELEMENT
 // Estrella.prototype = Object.create(Element.prototype);
 // Estrella.prototype.constructor = Estrella;
 }

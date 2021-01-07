@@ -21,7 +21,6 @@ function coordenadas(){
     
     var valorX = document.getElementById('valorX').value;
     var valorY = document.getElementById('valorY').value;
-    
     casillasLinea = partida.mida_tauler + 1;
 
     if (valorX == "" || valorY == "") {
@@ -36,7 +35,7 @@ function coordenadas(){
             if (objeto.toString() === objeto.toLocaleLowerCase()) {
                 document.getElementById(valorX + "," + valorY).innerHTML = '<img src="' + partida.cargarImagen(objeto) + '" />'; 
                 partida.tauler[valorX - 1][valorY - 1] = objeto.toUpperCase();
-                document.getElementById(valorX + "," + valorY).style.backgroundColor = partida.comprovarLetra(objeto.toUpperCase(), valorX, valorY);
+                document.getElementById(valorX + "," + valorY).style.backgroundColor = partida.mirarLetra(objeto.toUpperCase(), valorX, valorY);
             } else {
                 alert("Casilla descubierta");
             }

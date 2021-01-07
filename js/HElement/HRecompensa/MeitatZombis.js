@@ -1,9 +1,16 @@
 var MitadZombies = function (posicion){
-    //Herencia Recompensa
+    //Herencia recompensa.js
     Recompensa.apply(this, arguments);
-    var tipo = m;
+    var casillas = 0;
+}
 
-// //EXTEND RECOMPENSA
-// MitadZombies.prototype = Object.create(Recompensa.prototype);
-// MitadZombies.prototype.constructor = MitadZombies;
+//EXTEND RECOMPENSA
+
+MitadZombies.prototype = Object.create(Recompensa.prototype);
+MitadZombies.prototype.constructor = Recompensa;
+MitadZombies.prototype.Draw = function(dibujar) {
+
+    dibujar[this.x][this.y] = "mz";
+
+}
 }
