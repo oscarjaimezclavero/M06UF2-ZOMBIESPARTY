@@ -3,50 +3,30 @@ let partida = {
     mida_casselles_tauler: 0, 
     tauler: [],
     elementos:[],
-    zombies: [], /*25% de mida_caselles_tauler*/
-    estrelles: [], /* mida_tauler */
+    zombies: [], 
+    estrelles: [],
     recompenses:[],
     doblePunts:[],
     meitatZombis:[],
     vidaExtra:[],
     casillaEscogidas: 0,
+
+    // Stats
     ganadas:0,
     perdidas:0,
     vidas: 3,
     puntos_totales: 0,
-    //cuando encuentre zombie: vida -=1; puntos_totales -= 100;
-    //if vidas = 0: juego nuevo y actualizar localStorage;
-    //cuando encuentre estrella: puntos_totales += 200;
-    //cuando destape cesped: puntos_totales += 50;
-
-    estrellas_totales: this.mida_tauler,
     estrellas_creadas:0, 
     estrellas_encontrados: 0,
-    //if destapa estrellas_encontrados estrellas encontrados += 1;
-
-    zombies_totales: this.mida_casselles_tauler * 0.25, 
     zombies_creados:0,
     zombies_encontrados: 0,
-    //if mitad_zombies se activa zombies_totales / 2;
-    //if destapa zombie zombies_encontrados += 1;
-
     recompensas_creadas:0,
-
     pdobles_totales: 0, 
     pdobles_encontrados: 0,
-    // cuando haga el random para escoger que recompensas poner: pdobles_totales += 1;
-    // if destapa pdobles_encontrados += 1;
-
     vidaaextra_totales: 0, 
     vidaextra_encontrados: 0,
-    // cuando haga el random para escoger que recompensas poner: vidaaextra_totales += 1;
-    // if destapa vidaextra_encontrados += 1;
-
     mitadzombies_totales: 0, 
     mitadzombies_encontrados: 0,
-    // cuando haga el random para escoger que recompensas poner: mitadzombies_totales += 1;
-    // if destapa mitadzombies_totales += 1;
-
 
     // Nos llenara la tabla con cesped y segun la medida que nos diga el usuario
     inicialitzar_tauler: function() {
@@ -69,6 +49,7 @@ let partida = {
 
     //esta funcion es donde controlará todos los objetos
     iniciar: function(mida){
+        this.reinicio();
         this.mida_tauler = mida;
         this.mida_casselles_tauler = mida * mida;
         //creem el tauler amb g
@@ -80,9 +61,8 @@ let partida = {
         //finalment afegim el tauler amb divs
         this.pintar_tauler(this.mida_tauler);
 
-
-        document.getElementById("valorX").maxLength = this.mida_tauler >= 10 ? 2 : 1;
-        document.getElementById("valorY").maxLength = this.mida_tauler >= 10 ? 2 : 1;
+        
+        
 
         //stats partidas ganadas:
         if(localStorage.getItem("ganadas") == null){
@@ -106,9 +86,9 @@ let partida = {
         let taula = "<div id='taulaGeneral'>";
 
         for (let i = 0; i < mida_tauler ; i++) {
-            taula += "<div>";
+            taula += "<div id='fila'>";
             for (let j = 0; j < mida_tauler ; j++) {
-                    taula += "<div id='" + (i+1) + "," + (j+1) + "'><img src='img/cespedoculto.jpg'></div>";
+                    taula += "<div id='" + (i+1) + "," + (j+1) + "' class='casilla' ><img src='img/cespedoculto.jpg'></div>";
                 }
             taula += "</div>";
         }
@@ -497,6 +477,32 @@ let partida = {
         return this.tauler;
     },
 
+    reinicio: function(){
+        this.tauler=[],
+        this.elementos=[],
+        this.zombies=[], 
+        this.estrelles=[],
+        this.recompenses=[],
+        this.doblePunts=[],
+        this.meitatZombis=[],
+        this.vidaExtra=[],
+        this.casillaEscogidas=0,
+        this.ganadas=0,
+        this.perdidas=0,
+        this.vidas=3,
+        this.puntos_totales=0,
+        this.estrellas_creadas=0, 
+        this.estrellas_encontrados=0,
+        this.zombies_creados=0,
+        this.zombies_encontrados=0,
+        this.recompensas_creadas=0,
+        this.pdobles_totales=0, 
+        this.pdobles_encontrados=0,
+        this.vidaaextra_totales=0, 
+        this.vidaextra_encontrados=0,
+        this.mitadzombies_totales=0, 
+        this.mitadzombies_encontrados=0
+    }
     // getPosicio: function(x,y){
     //     return tauler[x],[y];
     // },

@@ -58,15 +58,12 @@ body{
     max-width:200px;
     height: auto;
     width: auto;
-    
     position: relative;
-
     display: table;
 }
 
 #taulaGeneral{
-   
-
+    display:flex;
 }
 
 
