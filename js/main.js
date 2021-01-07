@@ -65,7 +65,9 @@ function limpiarCasillas(id) {
 
 //revisar
 function abandonar(){
-    reiniciar()
+    partida.abandonadas+=1;
+    localStorage.setItem("abandonadas", partida.abandonadas);
+    reiniciar();
 }
 //revisar
 function reiniciar(){
