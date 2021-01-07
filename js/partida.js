@@ -42,7 +42,54 @@ let partida = {
         //this.crear_Recompensas();
         //this.crear_Zombis();
 
-    }, 
+
+        var ganadas; var perdidas;
+        // no tocar;
+        //---------------
+        
+
+        var vidas = 3; var puntos_totales = 0;
+        //cuando encuentre zombie: vida -=1; puntos_totales -= 100;
+        //if vidas = 0: juego nuevo y actualizar localStorage;
+        //cuando encuentre estrella: puntos_totales += 200;
+        //cuando destape cesped: puntos_totales += 50;
+
+
+        var estrellas_totales = this.mida_tauler; var estrellas_encontrados = 0;
+        //if destapa estrellas_encontrados estrellas encontrados += 1;
+
+        var zombies_totales = this.mida_casselles_tauler * 0.25; var zombies_encontrados = 0;
+        //if mitad_zombies se activa zombies_totales / 2;
+        //if destapa zombie zombies_encontrados += 1;
+ 
+        var pdobles_totales = 0; var pdobles_encontrados = 0;
+        // cuando haga el random para escoger que recompensas poner: pdobles_totales += 1;
+        // if destapa pdobles_encontrados += 1;
+
+        var vidaaextra_totales = 0; var vidaextra_encontrados = 0;
+        // cuando haga el random para escoger que recompensas poner: vidaaextra_totales += 1;
+        // if destapa vidaextra_encontrados += 1;
+
+        var mitadzombies_totales = 0; var mitadzombies_totales = 0;
+        // cuando haga el random para escoger que recompensas poner: mitadzombies_totales += 1;
+        // if destapa mitadzombies_totales += 1;
+
+        //stats partidas ganadas:
+        if(localStorage.getItem("ganadas") == null){
+            ganadas = localStorage.setItem("ganadas", 0);
+        }
+            else{guanyades = localStorage.getItem("guanyades");}      
+
+        if (localStorage.getItem("perdidas") == null) {
+            perdidas = localStorage.setItem("perdidas", 0);
+        }
+            else{perdudes = localStorage.getItem("perdudes");}
+
+        estadistiques.innerHTML = "ganadas: " + ganadas + "<br> perdidas: " + perdidas;
+
+        //cuando se gane actualizar localStorage, IDEM con perdidas
+
+    },
     
     //crea la tabla
     pintar_tauler: function(){
