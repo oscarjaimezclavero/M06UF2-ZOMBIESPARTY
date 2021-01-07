@@ -2,12 +2,14 @@ let partida = {
     mida_tauler: 0, 
     mida_casselles_tauler: 0, 
     tauler: [],
+    elementos:[],
     zombies: [], /*25% de mida_caselles_tauler*/
     estrelles: [], /* mida_tauler */
     recompenses:[],
     doblePunts:[],
     meitatZombis:[],
     vidaExtra:[],
+    casillaEscogida: 0,
 
     // Nos llenara la tabla con cesped y segun la medida que nos diga el usuario
     inicialitzar_tauler: function() {
@@ -61,6 +63,28 @@ let partida = {
     }, 
     
 
+    cargarImagen: function(tipo){
+        switch (tipo.toUpperCase){
+            case 'Z':
+                return "img/zombie.png";
+            case 'E':
+                return "img/estrella.png";
+            case 'D':
+                return "img/doblepuntuacion.png";
+            case 'M':
+                return "img/mitadzombies.png";
+            case 'V':
+                return "img/vidaextra.png";
+            case 'G':
+                return "img/cesped.jpg";
+        }
+    },
+
+    mirarLetra: function(tipo, valorX, valorY){
+
+        this.inicialitzar_tauler;
+        partida.casillaEscogida
+    }
 
 
 

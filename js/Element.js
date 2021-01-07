@@ -90,27 +90,7 @@ var Tauler = function (datousuario){
 }
 
 
-// Tauler.prototype.cargarImagen = function(tipo){
-//     switch (tipo){
-//         case 'z':
-//             document.getElementById("prueba1").src="img/zombie.png";
-//             break;
-//         case 'e':
-//             document.getElementById("prueba1").src="img/estrella.png";
-//             break;
-//         case 'd':
-//             document.getElementById("prueba1").src="img/doblepuntuacion.png";
-//             break;
-//         case 'm':
-//             document.getElementById("prueba1").src="img/mitadzombies.png";
-//             break;
-//         case 'v':
-//             document.getElementById("prueba1").src="img/vidaextra.png";
-//             break;
-//         default:
-//             document.getElementById("prueba1").src="img/cesped.png";
-//     }
-// }
+
 
 
 // //CREACION OBJETOS
