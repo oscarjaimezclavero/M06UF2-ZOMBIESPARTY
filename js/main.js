@@ -4,7 +4,6 @@ window.onload = function() {
         
 };
 
-
 function iniciarJuego(){
 // Hace desaparecer los 2 div inicialmente
 document.getElementById("textdivinput").style.display = "";
@@ -14,9 +13,9 @@ document.getElementById("statsdiv").style.display = "none";
 document.getElementById("coordenadas").style.display = "none";
 }
 
-
 //funcion que mirara si el valor es correcto o no
 function revisardato(){
+
     var datousuario = document.getElementById('valorusuario').value;
     if (datousuario < 5 || datousuario > 20){
         alert("dato incorrecto");
@@ -24,6 +23,7 @@ function revisardato(){
     else {
         partida.iniciar(datousuario);
     }
+    limpiarCasillas('valorusuario');
 }
 
 function coordenadas(){
@@ -54,12 +54,13 @@ function coordenadas(){
             alert("Las coordenadas no existen");
         }
     }
-    limpiarCasillas();
+    limpiarCasillas('valorX');
+    limpiarCasillas('valorY');
 }
 
-function limpiarCasillas() {
-    document.getElementById("valorX").value = "";
-    document.getElementById("valorY").value = "";
+//limpia las casillas con el id correspondiente
+function limpiarCasillas(id) {
+    document.getElementById(id).value = "";
 }
 
 //revisar
@@ -68,7 +69,7 @@ function abandonar(){
 }
 //revisar
 function reiniciar(){
-    iniciarJuego()
+    iniciarJuego();
 }
 //revisar
 function clicar(casilla){

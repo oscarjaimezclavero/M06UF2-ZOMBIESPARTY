@@ -71,14 +71,18 @@ let partida = {
     iniciar: function(mida){
         this.mida_tauler = mida;
         this.mida_casselles_tauler = mida * mida;
-
+        //creem el tauler amb g
         this.inicialitzar_tauler();
+        //modifiquem amb diferents elements el tauler
+        this.crear_recompensas();
+        this.crear_zombies();
+        this.crear_estrelles();
+        //finalment afegim el tauler amb divs
         this.pintar_tauler(this.mida_tauler);
 
-        //this.crear_Estrelles();
-        //this.crear_Recompensas();
-        //this.crear_Zombis();
 
+        document.getElementById("valorX").maxLength = this.mida_tauler >= 10 ? 2 : 1;
+        document.getElementById("valorY").maxLength = this.mida_tauler >= 10 ? 2 : 1;
 
         //stats partidas ganadas:
         if(localStorage.getItem("ganadas") == null){
@@ -117,17 +121,17 @@ let partida = {
     cargarImagen: function(tipo){
         switch (tipo.toUpperCase){
             case 'Z':
-                return 'img/zombie.png';
+                return '/img/zombie.png';
             case 'E':
-                return 'img/estrella.png';
+                return '/img/estrella.png';
             case 'D':
-                return 'img/doblepuntuacion.png';
+                return '/img/doblepuntuacion.png';
             case 'M':
-                return 'img/mitadzombies.png';
+                return '/img/mitadzombies.png';
             case 'V':
-                return 'img/vidaextra.png';
+                return '/img/vidaextra.png';
             case 'G':
-                return 'img/cesped.jpg';
+                return '/img/cesped.jpg';
         }
     },
 
@@ -140,7 +144,7 @@ let partida = {
             case "D":
                 valorX--;
                 valorY--;
-                for (let i = 0; i < partida.doblePuntos.length; i++) {
+                for (let i = 0; i < partida.doblePunts.length; i++) {
                     //Si encuentra en esa posicion que tiene las mismas coordenadas que yo suma las estadisticas
                     if (valorX == partida.doblePunts[i].x && valorY == partida.doblePunts[i].y) { 
                         partida.pdobles_encontrados++;
@@ -238,18 +242,16 @@ let partida = {
     crear_estrelles: function(){
         try {
             var estrella = new Estrella();
-            while (this.estrellas_totales < (this.mida_tauler)) {
+            while (this.estrellas_creadas < (this.mida_tauler)) {
                 do {
                     var x = Math.floor(Math.random() * this.mida_tauler);
                     var y = Math.floor(Math.random() * this.mida_tauler);
                 } while (this.tauler[x][y] != "g");
-                
                 estrella.x = x;
                 estrella.y = y;
-                this.tablero[x][y] = "e";
+                this.tauler[x][y] = "e";
                 this.estrellas_creadas++;
                 this.estrelles.push(estrella);
-
             }
         // el catch sirve para que si hay alguna excepcion utilizara lo que haya en catch, que en este caso es "nada" y no hara nada
         } catch (excepcion) {} 
@@ -258,7 +260,7 @@ let partida = {
     crear_zombies: function() {
         var zombi = new Zombie();
 
-        while (this.zombies_creados < ((this.mida_tauler * this.mida_tauler) * 25) / 100) {
+        while (this.zombies_creados < ((this.mida_casselles_tauler) * 25) / 100) {
             do {
                 var x = Math.floor(Math.random() * this.mida_tauler);
                 var y = Math.floor(Math.random() * this.mida_tauler);
@@ -274,16 +276,14 @@ let partida = {
     
     crear_recompensas: function() {
         //25% del total del tauler tendran que ser recompensas
-        while (this.recompensas_creadas < ((this.mida_tauler * this.mida_tauler) * 25) / 100) {
-
-            this.crear_doblePuntos();
-            this.crear_mitadZombie();
-            this.crear_vidaExtra();
-
+        while (this.recompensas_creadas < ((this.mida_casselles_tauler) * 25) / 100) {
+            this.crear_VidaExtra();
+            this.crear_MitadZombie();
+            this.crear_DoblePuntos();
         }
     },
 
-    crearDoblePuntos: function() {
+    crear_DoblePuntos: function() {
 
         try {
             var doblesPuntos = new DoblePuntuacion (1, 0);
@@ -302,7 +302,7 @@ let partida = {
         } catch (excepcion) {}
     },
 
-    crearMitadZombie: function() {
+    crear_MitadZombie: function() {
 
         try {
             var orientacion = Math.floor(Math.random() * 2);
@@ -347,7 +347,7 @@ let partida = {
         } catch (excepcion) {}
     },
 
-    crearVidaExtra: function() {
+    crear_VidaExtra: function() {
 
         try {
             var orientacion = Math.floor(Math.random() * 2);
@@ -361,14 +361,14 @@ let partida = {
                     x = Math.floor(Math.random() * this.mida_tauler);
                     y = Math.floor(Math.random() * this.mida_tauler);
 
-                } while (this.tauler[x][y] != "g" || this.tauler[x - 1][y] != "g" || this.tauler[x + 1][y] != "g" || x > this.medidaTablero - 2 && x <= 0);
+                } while (this.tauler[x][y] != "g" || this.tauler[x - 1][y] != "g" || this.tauler[x + 1][y] != "g" || x > this.mida_tauler - 2 && x <= 0);
 
                 vida.x = x;
                 vida.y = y;
                 vida.orientacion = orientacion;
-                this.tauler[x][y] = "ve";
-                this.tauler[x + 1][y] = "ve";
-                this.tauler[x - 1][y] = "ve";
+                this.tauler[x][y] = "v";
+                this.tauler[x + 1][y] = "v";
+                this.tauler[x - 1][y] = "v";
                 this.recompensas_creadas += 3;
 
             } else {
@@ -378,14 +378,14 @@ let partida = {
                     x = Math.floor(Math.random() * this.mida_tauler);
                     y = Math.floor(Math.random() * this.mida_tauler);
 
-                } while (this.tauler[x][y] != "g" || this.tauler[x][y - 1] != "g" || this.tauler[x][y + 1] != "g" || y > this.medidaTablero - 2 && y <= 0);
+                } while (this.tauler[x][y] != "g" || this.tauler[x][y - 1] != "g" || this.tauler[x][y + 1] != "g" || y > this.mida_tauler - 2 && y <= 0);
 
                 vida.x = x;
                 vida.y = y;
                 vida.orientacion = orientacion;
-                this.tauler[x][y] = "ve";
-                this.tauler[x][y + 1] = "ve"
-                this.tauler[x][y - 1] = "ve"
+                this.tauler[x][y] = "v";
+                this.tauler[x][y + 1] = "v"
+                this.tauler[x][y - 1] = "v"
                 this.recompensas_creadas += 3;
             }
 
@@ -504,7 +504,5 @@ let partida = {
     // setPosicio: function(x,y){
     //     this.tauler[x],[y];
     // },
-
-
 
 }
