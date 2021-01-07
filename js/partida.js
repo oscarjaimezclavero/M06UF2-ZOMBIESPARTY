@@ -20,9 +20,12 @@ let partida = {
         }
         console.log(this.tauler);
 
-        // Hace aparecer los 2 div ocultos
+        // Hace aparecer los 3 div ocultos
         document.getElementById("gamediv").style.display = "block";
         document.getElementById("statsdiv").style.display = "block";
+        document.getElementById("coordenadas").style.display = "block";
+        // Hace desaparecer el div del valor de tablero
+        document.getElementById("textdivinput").style.display = "none";
     },
 
     //esta funcion es donde controlará todos los objetos
