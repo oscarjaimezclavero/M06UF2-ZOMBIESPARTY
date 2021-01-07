@@ -12,9 +12,6 @@ let partida = {
     casillaEscogidas: 0,
 
     // Stats
-    ganadas:0,
-    perdidas:0,
-    abandonadas:0,
     vidas: 3,
     puntos_totales: 0,
     estrellas_creadas:0, 
@@ -57,23 +54,27 @@ let partida = {
         this.crear_recompensas();
         this.crear_zombies();
         this.crear_estrelles();
+
+        this.estadisticas();
         //finalment afegim el tauler amb divs
         this.pintar_tauler(this.mida_tauler);
 
-        
-        
 
         //Generamos el localStorage de ganadas, perdidas y abandonadas si no existen
         if(localStorage.getItem("ganadas") == null){
-            this.ganadas = localStorage.setItem("ganadas", 0);
+            localStorage.setItem("ganadas", 0);
         }
-            else{this.ganadas = localStorage.getItem("ganadas");}      
+            else{localStorage.getItem("ganadas");}      
 
         if (localStorage.getItem("perdidas") == null) {
-            this.perdidas = localStorage.setItem("perdidas", 0);
+            localStorage.setItem("perdidas", 0);
         }
-            else{this.perdidas = localStorage.getItem("perdidas");}
-
+            else{localStorage.getItem("perdidas");}
+        
+        if (localStorage.getItem("abandonadas") == null) {
+                localStorage.setItem("abandonadas", 0);
+            }
+                else{localStorage.getItem("abandonadas");}
 
 
     },
@@ -97,23 +98,23 @@ let partida = {
 
     cargarImagen: function(tipo){
         switch (tipo.toUpperCase()){
-            case 'z':
-                return '/img/zombie.png';
-            case 'e':
-                return '/img/estrella.png';
-            case 'd':
-                return '/img/doblepuntuacion.png';
-            case 'm':
-                return '/img/mitadzombies.png';
-            case 'v':
-                return '/img/vidaextra.png';
-            case 'g':
-                return '/img/cesped.jpg';
+            case 'Z':
+                return '../img/zombie.png';
+            case 'E':
+                return '../img/estrella.png';
+            case 'D':
+                return '../img/doblepuntuacion.png';
+            case 'M':
+                return '../img/mitadzombies.png';
+            case 'V':
+                return '../img/vidaextra.png';
+            case 'G':
+                return '../img/cesped.jpg';
         }
     },
 
     mirarLetra: function(tipo, valorX, valorY){
-
+        
         console.log(this.tauler);
         partida.casillaEscogidas++;
 
@@ -130,7 +131,8 @@ let partida = {
                 }
                 //Dobla la puntuación
                 this.puntos_totales = this.puntos_totales * 2; 
-                this.Estadisticas();
+                this.estadisticas();
+                break;
                 
             case "M":
                 valorX--;
@@ -150,7 +152,8 @@ let partida = {
                         }
                     }
                 }
-                this.Estadisticas();
+                this.estadisticas();
+                break;
 
             case "V":
                 valorX--;
@@ -170,7 +173,8 @@ let partida = {
                         }
                     }
                 }
-                this.Estadisticas();
+                this.estadisticas();
+                break;
 
             case "Z":
                 this.zombies_encontrados++;
@@ -180,21 +184,16 @@ let partida = {
                     this.puntos_totales = this.puntos_totales - 100;
                 }
                 this.vidas--;
-                this.Estadisticas();
+                this.estadisticas();
                 if (this.vidas == 0) {
                     alert("¡GAME OVER!");
                     setTimeout(function() {
-<<<<<<< HEAD
-                        this.perdidas++;
-                        localStorage.setItem("perdidas", this.perdidas);
-=======
                         localStorage.perdidas = Number(localStorage.perdidas) + 1;
-                        this.estadisticas();
->>>>>>> 3aa164ef6a26e7bd34e4ae6465502046ab974175
                         reiniciar();
                     }, 1000);
                 }
-
+                break;
+                
             case "E":
                 partida.estrellas_encontrados++;
                 this.puntos_totales += 200;
@@ -206,24 +205,21 @@ let partida = {
                 if(partida.estrellas_encontrados==this.mida_tauler){
                     alert("¡You Win!");
                     setTimeout(function() {
-<<<<<<< HEAD
-                        this.ganadas++;
-                        localStorage.setItem("ganadas", this.ganadas);
-=======
                         localStorage.ganadas = Number(localStorage.ganadas) + 1;
-                        this.estadisticas();
->>>>>>> 3aa164ef6a26e7bd34e4ae6465502046ab974175
                         reiniciar();
                     }, 1000);        
                 }
                 if (partida.casillaEscogidas<2){
-                    this.revelarTablero();
+                    //revela el tablero durante unos segundos
+                    //this.revelarTablero();
                 }
-                this.Estadisticas();
+                this.estadisticas();
+                break;
 
             case "G":
                 this.puntos_totales += 50;
-                this.Estadisticas();
+                this.estadisticas();
+                break;
         }
     },
 
@@ -337,7 +333,7 @@ let partida = {
                 this.recompensas_creadas += 2;
             }
 
-            this.MitadZombies.push(mitad);
+            this.meitatZombis.push(mitad);
 
         } catch (e) {}
     },
@@ -388,7 +384,8 @@ let partida = {
 
         } catch (e) {}
     },
-
+    
+// revisar, no funciona correctamente
     revelarTablero: function(){
         for (let i = 1; i <= this.tauler.length; i++) {
             for (let j = 1; j <= this.tauler[0].length; j++) {
@@ -422,29 +419,32 @@ let partida = {
     },
 
     eliminarMitadZombies: function() {
+        
         let zombiesDescubiertos = 0;
 
         for (i = 0; i != this.zombies.length; i++) {
-            if (this.zombies[i].seleccionado == false) {
+            if (!this.zombies[i].seleccionado) {
                 zombiesDescubiertos++;
             }
         }
 
-        let mitadZombiesDescubiertos = (zombiesDescubiertos / 2);
+        let mitadZombiesDescubiertos = Math.trunc(zombiesDescubiertos / 2);
         n = 0;
 
-        while (mitadZombiesDescubiertos >= 0) {
-            if (!this.zombies[n].seleccionado) {
-                this.zombies[n].seleccionado = true;
+        while (mitadZombiesDescubiertos >= 0 && n < this.zombies.length) {
+            let zombie = this.zombies[n];
+            if (zombie.seleccionado == false) {
                 mitadZombiesDescubiertos--;
-                this.getTauler()[this.zombies[n].x][this.zombies[n].y] = 'g';
+                this.tauler[zombie.x][zombie.y] = 'g';
+                this.zombies.splice(n, 1);
             }
             n++;
         }
+        console.log(this.zombies);
+        this.estadisticas();
     },
 
-    // REVISAR
-    Estadisticas: function() {
+    estadisticas: function() {
 
         var ver;
 
@@ -488,13 +488,9 @@ let partida = {
         document.getElementById("stats").innerHTML = ver;
     },
 
-    getTauler: function(){
-        return this.tauler;
-    },
-
     abandonar: function(){
-        partida.abandonadas+=1;
-        localStorage.setItem("abandonadas", partida.abandonadas);
+        localStorage.abandonadas = Number(localStorage.abandonadas) + 1;
+        this.estadisticas();
         reiniciar();
     },
 
