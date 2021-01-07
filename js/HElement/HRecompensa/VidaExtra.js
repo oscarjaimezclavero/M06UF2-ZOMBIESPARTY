@@ -1,7 +1,7 @@
 var VidaExtra = function (posicion){
     //Herencia Recompensa.js
     Recompensa.apply(this, arguments);
-    var tipo = v;
+
 }
 
 // //EXTEND RECOMPENSA

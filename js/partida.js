@@ -286,8 +286,8 @@ let partida = {
 
         try {
             var orientacion = Math.floor(Math.random() * 2);
-            var mitad = new mitadZombies(2, orientacion);
-            cmz.casillas = 0;
+            var mitad = new MitadZombies(2, orientacion);
+            mitad.casillas = 0;
             if (orientacion == 0) {
                 var x = 0,
                     y = 0;
@@ -331,7 +331,7 @@ let partida = {
 
         try {
             var orientacion = Math.floor(Math.random() * 2);
-            var vida = new vidaExtra(3, orientacion);
+            var vida = new VidaExtra(3, orientacion);
             vida.casillas = 0;
 
             if (orientacion == 0) {
@@ -341,7 +341,7 @@ let partida = {
                     x = Math.floor(Math.random() * this.mida_tauler);
                     y = Math.floor(Math.random() * this.mida_tauler);
 
-                } while (this.tauler[x][y] != "g" || this.tauler[x - 1][y] != "g" || this.tauler[x + 1][y] != "g" || x > this.mida_tauler - 2 && x <= 0);
+                } while (this.tauler[x][y] != "g" || this.tauler[x - 1][y] != "g" || this.tauler[x + 1][y] != "g" || x > this.tauler - 2 && x <= 0);
 
                 vida.x = x;
                 vida.y = y;
@@ -358,7 +358,7 @@ let partida = {
                     x = Math.floor(Math.random() * this.mida_tauler);
                     y = Math.floor(Math.random() * this.mida_tauler);
 
-                } while (this.tauler[x][y] != "g" || this.tauler[x][y - 1] != "g" || this.tauler[x][y + 1] != "g" || y > this.mida_tauler - 2 && y <= 0);
+                } while (this.tauler[x][y] != "g" || this.tauler[x][y - 1] != "g" || this.tauler[x][y + 1] != "g" || y > this.tauler - 2 && y <= 0);
 
                 vida.x = x;
                 vida.y = y;
@@ -369,7 +369,7 @@ let partida = {
                 this.recompensas_creadas += 3;
             }
 
-            this.VidaExtra.push(vida);
+            this.vidaExtra.push(vida);
 
         } catch (excepcion) {}
     },
