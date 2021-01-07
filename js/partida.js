@@ -152,38 +152,37 @@ let partida = {
                 valorX--;
                 valorY--;
                 for (i = 0; i < partida.meitatZombis.length; i++) {
-                    var vE = partida.meitatZombis[i];
-                    if (valorX == vE.x && valorY == vE.y || //centro
-                        valorX - 1 == vE.x && valorY == vE.y || //izquierda
-                        valorX + 1 == vE.x && valorY == vE.y || //derecha
-                        valorX == vE.x && valorY - 1 == vE.y || //abajo
-                        valorX == vE.x && valorY + 1 == vE.y) { //arriba
-                        vE.casillas++;
-                        vE.seleccionado = true;
-                        if (vE.casillas == 2) {
+                    var objeto = partida.meitatZombis[i];
+                    if (valorX == objeto.x && valorY == objeto.y || //centro
+                        valorX - 1 == objeto.x && valorY == objeto.y || //izquierda
+                        valorX + 1 == objeto.x && valorY == objeto.y || //derecha
+                        valorX == objeto.x && valorY - 1 == objeto.y || //abajo
+                        valorX == objeto.x && valorY + 1 == objeto.y) { //arriba
+                            objeto.casillas++;
+                            objeto.seleccionado = true;
+                        if (objeto.casillas == 2) {
                             partida.mitadzombies_encontrados++;
                             partida.eliminarMitadZombies();
                         }
                     }
                 }
                 this.Estadisticas();
-                return '#e62e1b';
 
-            case "VE":
+            case "V":
                 valorX--;
                 valorY--;
                 for (i = 0; i < partida.vidaExtra.length; i++) {
-                    var vE = partida.vidaExtra[i];
-                    if (valorX == vE.x && valorY == vE.y || //centro
-                        valorX - 1 == vE.x && valorY == vE.y || //izquierda
-                        valorX + 1 == vE.x && valorY == vE.y || //derecha
-                        valorX == vE.x && valorY - 1 == vE.y || //abajo
-                        valorX == vE.x && valorY + 1 == vE.y) { //arriba
-                        vE.casillas++;
-                        vE.seleccionado = true;
-                        if (vE.casillas == 3) {
+                    var objeto = partida.vidaExtra[i];
+                    if (valorX == objeto.x && valorY == objeto.y || //centro
+                        valorX - 1 == objeto.x && valorY == objeto.y || //izquierda
+                        valorX + 1 == objeto.x && valorY == objeto.y || //derecha
+                        valorX == objeto.x && valorY - 1 == objeto.y || //abajo
+                        valorX == objeto.x && valorY + 1 == objeto.y) { //arriba
+                            objeto.casillas++;
+                            objeto.seleccionado = true;
+                        if (objeto.casillas == 3) {
                             partida.vidas++;
-                            partida.vidasExtrasEncontradas++;
+                            partida.vidaextra_encontrados++;
                         }
                     }
                 }
@@ -191,45 +190,45 @@ let partida = {
                 return '#7FED7E';
 
             case "Z":
-                this.zombiesEncontrados++;
-                this.puntos = this.puntos - 100 < 0 ? 0 : this.puntos - 100; // ternaria para substituir el if
+                this.zombies_encontrados++;
+                if (this.puntos_totales < 100){
+                    this.puntos_totales = 0;
+                }else{
+                    this.puntos_totales = this.puntos_totales - 100;
+                }
                 this.vidas--;
                 this.Estadisticas();
                 if (this.vidas == 0) {
+                    alert("¡GAME OVER!");
                     setTimeout(function() {
-                        alert("HAS PERDIDO!!!");
-                    }, 250);
-                    disableAll();
+                        reiniciar();
+                    }, 1000);
                 }
-                return '#93c572';
 
             case "E":
-                partida.estrellasEncontradas++;
-                this.puntos += 200;
-                for (i = 0; i < partida.estrellas.length; i++) {
-                    if (partida.estrellas[i].valorX == valorX && partida.estrellas[i].valorY == valorY) {
-                        partida.estrellas[i].seleccionado = true;
+                partida.estrellas_encontrados++;
+                this.puntos_totales += 200;
+                for (i = 0; i < partida.estrelles.length; i++) {
+                    if (partida.estrelles[i].valorX == valorX && partida.estrelles[i].valorY == valorY) {
+                        partida.estrelles[i].seleccionado = true;
                     }
                 }
-                if(partida.estrellasEncontradas==5){
+                if(partida.estrellas_encontrados==5){
+                    alert("¡You Win!");
                     setTimeout(function() {
-                        alert("HAS GANADO!!!");
-                    }, 2000);        
+                        reiniciar();
+                    }, 1000);        
                 }
-                if (partida.casillasSeleccionadas<2){
-                    console.log(partida.casillasSeleccionadas);
+                if (partida.casillaEscogidas<2){
+                    console.log(partida.casillaEscogidas);
                     this.RevelarTablero();
                 }
                 this.Estadisticas();
-                return '#57a639';
 
             case "G":
-                this.puntos += 50;
+                this.puntos_totales += 50;
                 this.Estadisticas();
-                return '#F09D61';
-
         }
-        return '#fff';
     },
 
 
@@ -245,38 +244,29 @@ let partida = {
             this.setPosicio(i,j);
         }
     },
-    
-    eliminarMitadZombies: function() {
 
+    eliminarMitadZombies: function() {
         let zombiesDescubiertos = 0;
 
         for (i = 0; i != this.zombies.length; i++) {
-
             if (this.zombies[i].seleccionado == false) {
-
                 zombiesDescubiertos++;
-
             }
         }
 
         let mitadZombiesDescubiertos = (zombiesDescubiertos / 2);
-        a = 0;
+        n = 0;
 
         while (mitadZombiesDescubiertos >= 0) {
-
-            if (!this.zombies[a].seleccionado) {
-
-                this.zombies[a].seleccionado = true;
+            if (!this.zombies[n].seleccionado) {
+                this.zombies[n].seleccionado = true;
                 mitadZombiesDescubiertos--;
-
-                this.getTablero()[this.zombies[a].x][this.zombies[a].y] = 'g';
-
+                this.getTablero()[this.zombies[n].x][this.zombies[n].y] = 'g';
             }
-
-            a++;
+            n++;
         }
     },
-// REVISAR
+    // REVISAR
     Estadisticas: function() {
 
         var ver;
@@ -319,13 +309,18 @@ let partida = {
         ver += "partidas abandonadas: ";
 
         document.getElementById("centerStats").innerHTML = ver;
-    }
+    },
+
+    getTauler: function(){
+        return this.tauler;
+    },
+
+    getPosicio: function(x,y){
+        return tauler[x],[y];
+    },
+    
+    setPosicio: function(x,y){
+        tauler[x],[y];
+    },
 
 }
-// getPosicio: function(x,y){
-//     return tauler[x],[y];
-// }
-
-// setPosicio: function(x,y){
-//     tauler[x],[y];
-// }

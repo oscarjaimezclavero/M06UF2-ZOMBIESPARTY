@@ -1,10 +1,18 @@
 window.onload = function() {
-    // Hace desaparecer los 2 div inicialmente
-    document.getElementById("gamediv").style.display = "none";
-    document.getElementById("statsdiv").style.display = "none";
-    //Tampoco aparecera las casillas de coordenadas
-    document.getElementById("coordenadas").style.display = "none";
+    
+    iniciarJuego();
+        
 };
+
+
+function iniciarJuego(){
+// Hace desaparecer los 2 div inicialmente
+document.getElementById("gamediv").style.display = "none";
+document.getElementById("statsdiv").style.display = "none";
+//Tampoco aparecera las casillas de coordenadas
+document.getElementById("coordenadas").style.display = "none";
+}
+
 
 //funcion que mirara si el valor es correcto o no
 function revisardato(){
@@ -51,6 +59,14 @@ function limpiarCasillas() {
     document.getElementById("valorY").value = "";
 }
 
+//revisar
+function abandonar(){
+    reiniciar()
+}
+//revisar
+function reiniciar(){
+    iniciarJuego()
+}
 //revisar
 function clicar(casilla){
     
