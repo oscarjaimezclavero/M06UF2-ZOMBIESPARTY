@@ -63,7 +63,16 @@ function limpiarCasillas(id) {
     document.getElementById(id).value = "";
 }
 
+<<<<<<< HEAD
 
+=======
+//revisar
+function abandonar(){
+    localStorage.abandonadas = Number(localStorage.abandonadas) + 1;
+    this.estadisticas();
+    reiniciar();
+}
+>>>>>>> 3aa164ef6a26e7bd34e4ae6465502046ab974175
 //revisar
 function reiniciar(){
     iniciarJuego();

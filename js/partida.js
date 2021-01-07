@@ -184,8 +184,13 @@ let partida = {
                 if (this.vidas == 0) {
                     alert("¡GAME OVER!");
                     setTimeout(function() {
+<<<<<<< HEAD
                         this.perdidas++;
                         localStorage.setItem("perdidas", this.perdidas);
+=======
+                        localStorage.perdidas = Number(localStorage.perdidas) + 1;
+                        this.estadisticas();
+>>>>>>> 3aa164ef6a26e7bd34e4ae6465502046ab974175
                         reiniciar();
                     }, 1000);
                 }
@@ -201,8 +206,13 @@ let partida = {
                 if(partida.estrellas_encontrados==this.mida_tauler){
                     alert("¡You Win!");
                     setTimeout(function() {
+<<<<<<< HEAD
                         this.ganadas++;
                         localStorage.setItem("ganadas", this.ganadas);
+=======
+                        localStorage.ganadas = Number(localStorage.ganadas) + 1;
+                        this.estadisticas();
+>>>>>>> 3aa164ef6a26e7bd34e4ae6465502046ab974175
                         reiniciar();
                     }, 1000);        
                 }
@@ -469,11 +479,11 @@ let partida = {
         ver += "</br>";
         ver += "ESTADISTICAS:";
         ver += "</br>";
-        ver += "Partidas ganadas: " + this.ganadas;
+        ver += "Partidas ganadas: " + localStorage.ganadas;
         ver += "</br>";
-        ver += "Partidas perdidas: " + this.perdidas;
+        ver += "Partidas perdidas: " + localStorage.perdidas;
         ver += "</br>";
-        ver += "partidas abandonadas: " + this.abandonadas;
+        ver += "partidas abandonadas: " + localStorage.abandonadas;
 
         document.getElementById("stats").innerHTML = ver;
     },
