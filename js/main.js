@@ -43,10 +43,10 @@ function coordenadas(){
 
             if (objeto.toString() == objeto.toLocaleLowerCase()) {
                 
-                document.getElementById(valorX + "," + valorY).innerHTML = '<img src="' + partida.cargarImagen(objeto) + '" class="L_cont_cell" />'; //futuro alt
+                document.getElementById(valorX + "," + valorY).innerHTML = '<img src="' + partida.cargarImagen(objeto) + '" />';
                 partida.tauler[valorX - 1][valorY - 1] = objeto.toUpperCase();
                 partida.mirarLetra(objeto.toUpperCase(), valorX, valorY);
-                //document.getElementById(valorX + "," + valorY).style.backgroundColor = partida.mirarLetra(objeto.toUpperCase(), valorX, valorY);
+                
             } else {
                 alert("Casilla descubierta");
             }

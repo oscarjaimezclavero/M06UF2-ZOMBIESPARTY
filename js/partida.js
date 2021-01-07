@@ -21,11 +21,8 @@ let partida = {
     zombies_creados:0,
     zombies_encontrados: 0,
     recompensas_creadas:0,
-    pdobles_totales: 0, 
-    pdobles_encontrados: 0,
-    vidaaextra_totales: 0, 
-    vidaextra_encontrados: 0,
-    mitadzombies_totales: 0, 
+    pdobles_encontrados: 0, 
+    vidaextra_encontrados: 0, 
     mitadzombies_encontrados: 0,
 
     // Nos llenara la tabla con cesped y segun la medida que nos diga el usuario
@@ -99,7 +96,7 @@ let partida = {
     }, 
 
     cargarImagen: function(tipo){
-        switch (tipo){
+        switch (tipo.toUpperCase()){
             case 'z':
                 return '/img/zombie.png';
             case 'e':
@@ -117,7 +114,7 @@ let partida = {
 
     mirarLetra: function(tipo, valorX, valorY){
 
-        this.inicialitzar_tauler;
+        console.log(this.tauler);
         partida.casillaEscogidas++;
 
         switch (tipo.toUpperCase()) {
@@ -174,7 +171,6 @@ let partida = {
                     }
                 }
                 this.Estadisticas();
-                return '#7FED7E';
 
             case "Z":
                 this.zombies_encontrados++;
@@ -200,14 +196,13 @@ let partida = {
                         partida.estrelles[i].seleccionado = true;
                     }
                 }
-                if(partida.estrellas_encontrados==5){
+                if(partida.estrellas_encontrados==this.mida_tauler){
                     alert("¡You Win!");
                     setTimeout(function() {
                         reiniciar();
                     }, 1000);        
                 }
                 if (partida.casillaEscogidas<2){
-                    console.log(partida.casillaEscogidas);
                     this.revelarTablero();
                 }
                 this.Estadisticas();
@@ -256,11 +251,17 @@ let partida = {
     
     crear_recompensas: function() {
         //25% del total del tauler tendran que ser recompensas
-        while (this.recompensas_creadas < ((this.mida_casselles_tauler) * 25) / 100) {
+        var total = ((this.mida_casselles_tauler* 25) / 100);
+        this.crear_VidaExtra();
+        this.crear_MitadZombie();
+        this.crear_DoblePuntos();
+
+        while (this.recompensas_creadas < total) {
             this.crear_VidaExtra();
             this.crear_MitadZombie();
             this.crear_DoblePuntos();
         }
+
     },
 
     crear_DoblePuntos: function() {
@@ -279,7 +280,7 @@ let partida = {
             this.recompensas_creadas += 1;
             this.doblePunts.push(doblesPuntos);
 
-        } catch (excepcion) {}
+        } catch (e) {}
     },
 
     crear_MitadZombie: function() {
@@ -324,7 +325,7 @@ let partida = {
 
             this.MitadZombies.push(mitad);
 
-        } catch (excepcion) {}
+        } catch (e) {}
     },
 
     crear_VidaExtra: function() {
@@ -371,7 +372,7 @@ let partida = {
 
             this.vidaExtra.push(vida);
 
-        } catch (excepcion) {}
+        } catch (e) {}
     },
 
     revelarTablero: function(){
@@ -487,8 +488,6 @@ let partida = {
         this.meitatZombis=[],
         this.vidaExtra=[],
         this.casillaEscogidas=0,
-        this.ganadas=0,
-        this.perdidas=0,
         this.vidas=3,
         this.puntos_totales=0,
         this.estrellas_creadas=0, 
@@ -496,11 +495,8 @@ let partida = {
         this.zombies_creados=0,
         this.zombies_encontrados=0,
         this.recompensas_creadas=0,
-        this.pdobles_totales=0, 
         this.pdobles_encontrados=0,
-        this.vidaaextra_totales=0, 
         this.vidaextra_encontrados=0,
-        this.mitadzombies_totales=0, 
         this.mitadzombies_encontrados=0
     }
     // getPosicio: function(x,y){
