@@ -69,7 +69,7 @@ let partida = {
         this.mida_casselles_tauler = mida * mida;
 
         this.inicialitzar_tauler();
-        this.pintar_tauler();
+        this.pintar_tauler(this.mida_tauler);
 
         //this.crear_Estrelles();
         //this.crear_Recompensas();
@@ -87,22 +87,21 @@ let partida = {
         }
             else{perdudes = localStorage.getItem("perdudes");}
 
-        estadistiques.innerHTML = "ganadas: " + ganadas + "<br> perdidas: " + perdidas;
+        //estadistiques.innerHTML = "ganadas: " + ganadas + "<br> perdidas: " + perdidas;
 
         //cuando se gane actualizar localStorage, IDEM con perdidas
 
     },
     
     //crea la tabla
-    pintar_tauler: function(){
+    pintar_tauler: function(mida_tauler){
+        let taula = "<div id='taulaGeneral'>";
 
-        let taula = "<div id='taulaCentral'>";
-
-        for (let i = 1; i < this.mida_tauler + 1; i++) {
+        for (let i = 0; i < mida_tauler ; i++) {
             taula += "<div>";
-            for (let j = 1; j < this.mida_tauler + 1; j++) {
-                    taula += "<div id='" + i + "," + j + "' onclick='clicar(this.id)'><img src='/img/cespedoculto.jpg'></div>";
-            }
+            for (let j = 0; j < mida_tauler ; j++) {
+                    taula += "<div id='" + i + "," + j + "'><img src='img/cespedoculto.jpg'></div>";
+                }
             taula += "</div>";
         }
         taula += "</div>";
@@ -110,7 +109,7 @@ let partida = {
         // dentro de la variable taula esta creado con divs la tabla por lo tanto con innerHTML meteremos eso dentro de un div con Id especifico
         document.getElementById('tabla').innerHTML = taula;
     }, 
-    
+
     cargarImagen: function(tipo){
         switch (tipo.toUpperCase){
             case 'Z':
@@ -221,7 +220,7 @@ let partida = {
                 }
                 if (partida.casillaEscogidas<2){
                     console.log(partida.casillaEscogidas);
-                    this.RevelarTablero();
+                    this.revelarTablero();
                 }
                 this.Estadisticas();
 
@@ -230,9 +229,6 @@ let partida = {
                 this.Estadisticas();
         }
     },
-
-
-
 
     crear_estrelles: function(){
         let estrelles_creades = 0;
@@ -243,6 +239,38 @@ let partida = {
             estrelles_creades++;
             this.setPosicio(i,j);
         }
+    },
+
+    revelarTablero: function(){
+        for (let i = 1; i <= this.tauler.length; i++) {
+            for (let j = 1; j <= this.tauler[0].length; j++) {
+                let casilla = this.tauler[i - 1][j - 1];
+                document.getElementById(i + "," + j).innerHTML = '<img src="' + this.cargarImagen(casilla) + '" />';
+            }
+        }
+        //  Mostrara durante 3 segundos el tauler descubierto en su totalidad
+        setTimeout(function() {
+            habilitarBotones();
+            //Resetea todo el tauler a X
+            for (let i = 1; i <= partida.tauler.length; i++) {
+                for (let j = 1; j <= partida.tauler[0].length; j++) {
+                    document.getElementById(i + "," + j).innerHTML = '<img src="img/cespedoculto.jpg" />';
+                }
+            }
+
+            //Muestra los elementos guardados
+            for (let y = 0; y < partida.elementos.length; y++) {
+                const elem = partida.elementos[y];
+                var i = elem[0] + 1;
+                var j = elem[1] + 1;
+                let casilla = partida.tauler[i - 1][j - 1];
+                console.log(elem + " " + i + " " + j);
+                document.getElementById(i + "," + j).innerHTML = '<img src="' + partida.cargarImagen(casilla) + '" />';
+            }
+
+        }, 3000); 
+
+        deshabilitarBotones();
     },
 
     eliminarMitadZombies: function() {
@@ -261,39 +289,40 @@ let partida = {
             if (!this.zombies[n].seleccionado) {
                 this.zombies[n].seleccionado = true;
                 mitadZombiesDescubiertos--;
-                this.getTablero()[this.zombies[n].x][this.zombies[n].y] = 'g';
+                this.getTauler()[this.zombies[n].x][this.zombies[n].y] = 'g';
             }
             n++;
         }
     },
+
     // REVISAR
     Estadisticas: function() {
 
         var ver;
 
         ver = "<H2>PUNTUACIONES DEL JUEGO:</H2>"
-        ver += "Puntos totales: " + this.puntos;
+        ver += "Puntos totales: " + this.puntos_totales;
         ver += "</br>";
         ver += "</br>";
-        ver += "Estrellas: " + this.estrellas.length;
+        ver += "Estrellas: " + this.estrelles.length;
         ver += "</br>";
-        ver += "Estrellas encontradas: " + this.estrellasEncontradas;
+        ver += "Estrellas encontradas: " + this.estrellas_encontrados;
         ver += "</br>";
         ver += "Zombies: " + this.zombies.length;
         ver += "</br>";
-        ver += "Zombies encontrados: " + this.zombiesEncontrados;
+        ver += "Zombies encontrados: " + this.zombies_encontrados;
         ver += "</br>";
-        ver += "Puntos dobles: " + this.doblePuntos.length;
+        ver += "Puntos dobles: " + this.doblePunts.length;
         ver += "</br>";
-        ver += "Puntos dobles encontrados: " + this.doblesPuntosEncontrados;
+        ver += "Puntos dobles encontrados: " + this.pdobles_encontrados;
         ver += "</br>";
         ver += "Vidas extra: " + this.vidaExtra.length;
         ver += "</br>";
-        ver += "Vidas extra encontradas: " + this.vidasExtrasEncontradas;
+        ver += "Vidas extra encontradas: " + this.vidaextra_encontrados;
         ver += "</br>";
-        ver += "Mitad zombie: " + this.mitadZombie.length;
+        ver += "Mitad zombie: " + this.meitatZombis.length;
         ver += "</br>";
-        ver += "Mitad zombie encontrados: " + this.mitadZombiesEncontrados;
+        ver += "Mitad zombie encontrados: " + this.mitadzombies_encontrados;
         ver += "</br>";
         ver += "Vidas: " + this.vidas;
         ver += "</br>";
@@ -308,19 +337,21 @@ let partida = {
         ver += "</br>";
         ver += "partidas abandonadas: ";
 
-        document.getElementById("centerStats").innerHTML = ver;
+        document.getElementById("stats").innerHTML = ver;
     },
 
     getTauler: function(){
         return this.tauler;
     },
 
-    getPosicio: function(x,y){
-        return tauler[x],[y];
-    },
+    // getPosicio: function(x,y){
+    //     return tauler[x],[y];
+    // },
     
-    setPosicio: function(x,y){
-        tauler[x],[y];
-    },
+    // setPosicio: function(x,y){
+    //     this.tauler[x],[y];
+    // },
+
+
 
 }

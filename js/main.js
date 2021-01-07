@@ -7,6 +7,7 @@ window.onload = function() {
 
 function iniciarJuego(){
 // Hace desaparecer los 2 div inicialmente
+document.getElementById("textdivinput").style.display = "";
 document.getElementById("gamediv").style.display = "none";
 document.getElementById("statsdiv").style.display = "none";
 //Tampoco aparecera las casillas de coordenadas
@@ -32,7 +33,7 @@ function coordenadas(){
     casillasLinea = partida.mida_tauler + 1;
 
     if (valorX == "" || valorY == "") {
-        alert("Intenta a introducir unas coordenadas");
+        alert("Intenta a introducir unas coordenadas correctas");
     } else {
         if (valorX >= 0 && valorX < casillasLinea && valorY >= 0 && valorY < casillasLinea) {
             let objeto = partida.tauler[valorX - 1][valorY - 1];
@@ -41,9 +42,11 @@ function coordenadas(){
             console.log("Objeto: " + objeto);
 
             if (objeto.toString() === objeto.toLocaleLowerCase()) {
-                document.getElementById(valorX + "," + valorY).innerHTML = '<img src="' + partida.cargarImagen(objeto) + '" />'; 
+                
+                document.getElementById(valorX + "," + valorY).innerHTML = '<img src="' + partida.cargarImagen(objeto) + '" class="L_cont_cell" />'; //futuro alt
                 partida.tauler[valorX - 1][valorY - 1] = objeto.toUpperCase();
-                document.getElementById(valorX + "," + valorY).style.backgroundColor = partida.mirarLetra(objeto.toUpperCase(), valorX, valorY);
+                partida.mirarLetra(objeto.toUpperCase(), valorX, valorY);
+                //document.getElementById(valorX + "," + valorY).style.backgroundColor = partida.mirarLetra(objeto.toUpperCase(), valorX, valorY);
             } else {
                 alert("Casilla descubierta");
             }
@@ -121,4 +124,16 @@ function clicar(casilla){
 
 }
 
+function deshabilitarBotones(){
 
+    document.getElementById("botonCoord").disabled = true;
+    document.getElementById("botonAband").disabled = true;
+
+}
+
+function habilitarBotones(){
+
+    document.getElementById("botonCoord").disabled = false;
+    document.getElementById("botonAband").disabled = false;
+
+}

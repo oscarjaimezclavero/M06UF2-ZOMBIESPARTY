@@ -4,8 +4,7 @@
 
 img{
     width:80%;
-    justify-content: flex-start;
-    
+       
 }
 
 #inputdiv{
@@ -42,6 +41,7 @@ img{
 body{
     background-image: url(background.jpg);
     background-size: 100%;
+    position:relative;
 }
 
 #titulo{
@@ -55,9 +55,18 @@ body{
 }
 
 #tabla{
-    margin:auto;
-    width:100%;
     max-width:200px;
-    content:f
+    height: auto;
+    width: auto;
+    
+    position: relative;
+
+    display: table;
 }
+
+#taulaGeneral{
+   
+
+}
+
 
