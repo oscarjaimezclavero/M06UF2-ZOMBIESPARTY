@@ -1,9 +1,12 @@
 var VidaExtra = function (posicion){
-    //Herencia Recompensa
+    //Herencia Recompensa.js
     Recompensa.apply(this, arguments);
     var tipo = v;
-    
+}
+
 // //EXTEND RECOMPENSA
-// VidaExtra.prototype = Object.create(Recompensa.prototype);
-// VidaExtra.prototype.constructor = VidaExtra;
+VidaExtra.prototype = Object.create(Recompensa.prototype);
+VidaExtra.prototype.constructor = Recompensa;
+VidaExtra.prototype.Draw = function(dibujar) {
+    dibujar[this.x][this.y] = "v";
 }

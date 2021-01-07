@@ -10,7 +10,6 @@ MitadZombies.prototype = Object.create(Recompensa.prototype);
 MitadZombies.prototype.constructor = Recompensa;
 MitadZombies.prototype.Draw = function(dibujar) {
 
-    dibujar[this.x][this.y] = "mz";
+    dibujar[this.x][this.y] = "m";
 
-}
 }

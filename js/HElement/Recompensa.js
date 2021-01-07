@@ -6,8 +6,7 @@ var Recompensa = function (orientacion, space){
     this.space = space;
     this.orientacion = orientacion;
 
-
+}
 // //EXTEND ELEMENT
 Recompensa.prototype = Object.create(Element.prototype);
 Recompensa.prototype.constructor = Element;
-}
