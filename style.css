@@ -1,32 +1,35 @@
 #imagenTitulo{
     justify-content: center;
+    
 }
 
-img{
-    width:80%;
-       
+
+#contenido{
+    display:flex;
+    max-height: 1000px;
 }
 
 #inputdiv{
+    flex-grow: 1;
     border: 5px solid salmon;
-    height: 1000px;
-    width: 15%;
-    float: left;
+    height: 100%;
+    
+
 }
 
 #gamediv{
+    flex-grow: 6;
     border: 5px solid green;
-    height: 1000px;
-    width: 60%;
-    float: left;
-    padding-left: 20px;
+    height: 100%;
+
 }
 
 #statsdiv{
+    flex-grow: 1;
     border: 5px solid aqua;
-    height: 1000px;
-    width: 20%;
-    float: left;
+    height: 100%;
+    
+
 }
 
 #textdivinput{
@@ -44,8 +47,9 @@ body{
     position:relative;
 }
 
-#titulo{
+#tituloJuego{
     margin-left: 50%;
+
 }
 
 #titulo2{
@@ -54,22 +58,38 @@ body{
     width: 200px;
 }
 
-#tabla{
 
+
+#tabla{
     height: auto;
-    width: auto;
-    position: relative;
-    display: table;
+    max-width: 750px;
+    display:flex;
+    margin:auto;
+    text-align: center;
+    padding:20px;
 }
 
 #taulaGeneral{
-
+    flex-direction: column;
+    display:flex;
 }
 
 #fila{
     display:flex;
+    flex: 1 1 0;
 }
 
 .casilla{
     flex: 1 1 0;
+    /*
+    Es lo mismo que flex-grow: 1 flex-shrink: 1 y flex-basis: 0
+    Si uno de los items tuviera grow 2 ocuparía el doble que los demás
+    basis es para decirle cuánto de su propio tamaño debe tener en cuenta para repartir el espacio con los otros items dentro del display flex
+    */
+}
+
+/*Solo afecta a los elementos marcados como img dentro de casilla*/
+.casilla > img{
+    width:90%; 
+    max-height:90%;  
 }
