@@ -41,7 +41,7 @@ function coordenadas(){
             partida.elementos.push([valorX - 1, valorY - 1]);
             console.log("Objeto: " + objeto);
 
-            if (objeto.toString() === objeto.toLocaleLowerCase()) {
+            if (objeto.toString() == objeto.toLocaleLowerCase()) {
                 
                 document.getElementById(valorX + "," + valorY).innerHTML = '<img src="' + partida.cargarImagen(objeto) + '" class="L_cont_cell" />'; //futuro alt
                 partida.tauler[valorX - 1][valorY - 1] = objeto.toUpperCase();

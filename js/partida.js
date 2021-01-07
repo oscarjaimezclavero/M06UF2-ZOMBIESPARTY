@@ -19,14 +19,18 @@ let partida = {
     //cuando encuentre estrella: puntos_totales += 200;
     //cuando destape cesped: puntos_totales += 50;
 
-    estrellas_totales: this.mida_tauler, 
+    estrellas_totales: this.mida_tauler,
+    estrellas_creadas:0, 
     estrellas_encontrados: 0,
     //if destapa estrellas_encontrados estrellas encontrados += 1;
 
     zombies_totales: this.mida_casselles_tauler * 0.25, 
+    zombies_creados:0,
     zombies_encontrados: 0,
     //if mitad_zombies se activa zombies_totales / 2;
     //if destapa zombie zombies_encontrados += 1;
+
+    recompensas_creadas:0,
 
     pdobles_totales: 0, 
     pdobles_encontrados: 0,
@@ -100,7 +104,7 @@ let partida = {
         for (let i = 0; i < mida_tauler ; i++) {
             taula += "<div>";
             for (let j = 0; j < mida_tauler ; j++) {
-                    taula += "<div id='" + i + "," + j + "'><img src='img/cespedoculto.jpg'></div>";
+                    taula += "<div id='" + (i+1) + "," + (j+1) + "'><img src='img/cespedoculto.jpg'></div>";
                 }
             taula += "</div>";
         }
@@ -113,17 +117,17 @@ let partida = {
     cargarImagen: function(tipo){
         switch (tipo.toUpperCase){
             case 'Z':
-                return '/img/zombie.png';
+                return 'img/zombie.png';
             case 'E':
-                return '/img/estrella.png';
+                return 'img/estrella.png';
             case 'D':
-                return '/img/doblepuntuacion.png';
+                return 'img/doblepuntuacion.png';
             case 'M':
-                return '/img/mitadzombies.png';
+                return 'img/mitadzombies.png';
             case 'V':
-                return '/img/vidaextra.png';
+                return 'img/vidaextra.png';
             case 'G':
-                return '/img/cesped.jpg';
+                return 'img/cesped.jpg';
         }
     },
 
@@ -230,15 +234,164 @@ let partida = {
         }
     },
 
+    //Crear Objetos
     crear_estrelles: function(){
-        let estrelles_creades = 0;
-        while(estrelles_creades < 5){
-            let Estrella = new Estrella();
-            //para añadir un objeto al array al final
-            this.estrelles.push(estrella);
-            estrelles_creades++;
-            this.setPosicio(i,j);
+        try {
+            var estrella = new Estrella();
+            while (this.estrellas_totales < (this.mida_tauler)) {
+                do {
+                    var x = Math.floor(Math.random() * this.mida_tauler);
+                    var y = Math.floor(Math.random() * this.mida_tauler);
+                } while (this.tauler[x][y] != "g");
+                
+                estrella.x = x;
+                estrella.y = y;
+                this.tablero[x][y] = "e";
+                this.estrellas_creadas++;
+                this.estrelles.push(estrella);
+
+            }
+        // el catch sirve para que si hay alguna excepcion utilizara lo que haya en catch, que en este caso es "nada" y no hara nada
+        } catch (excepcion) {} 
+    },
+
+    crear_zombies: function() {
+        var zombi = new Zombie();
+
+        while (this.zombies_creados < ((this.mida_tauler * this.mida_tauler) * 25) / 100) {
+            do {
+                var x = Math.floor(Math.random() * this.mida_tauler);
+                var y = Math.floor(Math.random() * this.mida_tauler);
+            } while (this.tauler[x][y] != "g");
+            zombi.x = x;
+            zombi.y = y;
+
+            this.tauler[x][y] = "z";
+            this.zombies_creados++;
+            this.zombies.push(zombi);
         }
+    },
+    
+    crear_recompensas: function() {
+        //25% del total del tauler tendran que ser recompensas
+        while (this.recompensas_creadas < ((this.mida_tauler * this.mida_tauler) * 25) / 100) {
+
+            this.crear_doblePuntos();
+            this.crear_mitadZombie();
+            this.crear_vidaExtra();
+
+        }
+    },
+
+    crearDoblePuntos: function() {
+
+        try {
+            var doblesPuntos = new DoblePuntuacion (1, 0);
+            var x = 0,
+                y = 0;
+            do {
+                x = Math.floor(Math.random() * this.mida_tauler);
+                y = Math.floor(Math.random() * this.mida_tauler);
+            } while (this.tauler[x][y] != "g");
+            doblesPuntos.x = x;
+            doblesPuntos.y = y;
+            this.tauler[x][y] = "d";
+            this.recompensas_creadas += 1;
+            this.doblePunts.push(doblesPuntos);
+
+        } catch (excepcion) {}
+    },
+
+    crearMitadZombie: function() {
+
+        try {
+            var orientacion = Math.floor(Math.random() * 2);
+            var mitad = new mitadZombies(2, orientacion);
+            cmz.casillas = 0;
+            if (orientacion == 0) {
+                var x = 0,
+                    y = 0;
+                do {
+                    x = Math.floor(Math.random() * this.mida_tauler);
+                    y = Math.floor(Math.random() * this.mida_tauler);
+                } while (this.tauler[x][y] != "g" || this.tauler[x + 1][y] != "g" || x <= this.mida_tauler - 2);
+
+                mitad.x = x;
+                mitad.y = y;
+                mitad.orientacion = orientacion;
+
+                this.tauler[x][y] = "m";
+                this.tauler[x + 1][y] = "m";
+                this.recompensas_creadas += 2;
+
+            } else {
+                var x = 0,
+                    y = 0;
+                do {
+                    x = Math.floor(Math.random() * this.mida_tauler);
+                    y = Math.floor(Math.random() * this.mida_tauler);
+
+                } while (this.tauler[x][y] != "g" || this.tauler[x][y + 1] != "g" || y > this.mida_tauler - 2);
+
+                mitad.x = x;
+                mitad.y = y;
+                mitad.orientacion = orientacion;
+
+                this.tauler[x][y] = "m";
+                this.tauler[x][y + 1] = "m";
+                this.recompensas_creadas += 2;
+            }
+
+            this.MitadZombies.push(mitad);
+
+        } catch (excepcion) {}
+    },
+
+    crearVidaExtra: function() {
+
+        try {
+            var orientacion = Math.floor(Math.random() * 2);
+            var vida = new vidaExtra(3, orientacion);
+            vida.casillas = 0;
+
+            if (orientacion == 0) {
+                var x = 0,
+                    y = 0;
+                do {
+                    x = Math.floor(Math.random() * this.mida_tauler);
+                    y = Math.floor(Math.random() * this.mida_tauler);
+
+                } while (this.tauler[x][y] != "g" || this.tauler[x - 1][y] != "g" || this.tauler[x + 1][y] != "g" || x > this.medidaTablero - 2 && x <= 0);
+
+                vida.x = x;
+                vida.y = y;
+                vida.orientacion = orientacion;
+                this.tauler[x][y] = "ve";
+                this.tauler[x + 1][y] = "ve";
+                this.tauler[x - 1][y] = "ve";
+                this.recompensas_creadas += 3;
+
+            } else {
+                var x = 0,
+                    y = 0;
+                do {
+                    x = Math.floor(Math.random() * this.mida_tauler);
+                    y = Math.floor(Math.random() * this.mida_tauler);
+
+                } while (this.tauler[x][y] != "g" || this.tauler[x][y - 1] != "g" || this.tauler[x][y + 1] != "g" || y > this.medidaTablero - 2 && y <= 0);
+
+                vida.x = x;
+                vida.y = y;
+                vida.orientacion = orientacion;
+                this.tauler[x][y] = "ve";
+                this.tauler[x][y + 1] = "ve"
+                this.tauler[x][y - 1] = "ve"
+                this.recompensas_creadas += 3;
+            }
+
+            this.VidaExtra.push(vida);
+
+        } catch (excepcion) {}
     },
 
     revelarTablero: function(){
