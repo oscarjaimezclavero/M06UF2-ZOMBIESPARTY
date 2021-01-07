@@ -10,6 +10,39 @@ let partida = {
     meitatZombis:[],
     vidaExtra:[],
     casillaEscogida: 0,
+    ganadas,
+    perdidas,
+    vidas: 3,
+    puntos_totales: 0,
+    //cuando encuentre zombie: vida -=1; puntos_totales -= 100;
+    //if vidas = 0: juego nuevo y actualizar localStorage;
+    //cuando encuentre estrella: puntos_totales += 200;
+    //cuando destape cesped: puntos_totales += 50;
+
+    estrellas_totales: mida_tauler, 
+    estrellas_encontrados: 0,
+    //if destapa estrellas_encontrados estrellas encontrados += 1;
+
+    zombies_totales: mida_casselles_tauler * 0.25, 
+    zombies_encontrados: 0,
+    //if mitad_zombies se activa zombies_totales / 2;
+    //if destapa zombie zombies_encontrados += 1;
+
+    pdobles_totales: 0, 
+    pdobles_encontrados: 0,
+    // cuando haga el random para escoger que recompensas poner: pdobles_totales += 1;
+    // if destapa pdobles_encontrados += 1;
+
+    vidaaextra_totales: 0, 
+    vidaextra_encontrados: 0,
+    // cuando haga el random para escoger que recompensas poner: vidaaextra_totales += 1;
+    // if destapa vidaextra_encontrados += 1;
+
+    mitadzombies_totales: 0, 
+    mitadzombies_totales: 0,
+    // cuando haga el random para escoger que recompensas poner: mitadzombies_totales += 1;
+    // if destapa mitadzombies_totales += 1;
+
 
     // Nos llenara la tabla con cesped y segun la medida que nos diga el usuario
     inicialitzar_tauler: function() {
@@ -43,37 +76,6 @@ let partida = {
         //this.crear_Zombis();
 
 
-        var ganadas; var perdidas;
-        // no tocar;
-        //---------------
-        
-
-        var vidas = 3; var puntos_totales = 0;
-        //cuando encuentre zombie: vida -=1; puntos_totales -= 100;
-        //if vidas = 0: juego nuevo y actualizar localStorage;
-        //cuando encuentre estrella: puntos_totales += 200;
-        //cuando destape cesped: puntos_totales += 50;
-
-
-        var estrellas_totales = this.mida_tauler; var estrellas_encontrados = 0;
-        //if destapa estrellas_encontrados estrellas encontrados += 1;
-
-        var zombies_totales = this.mida_casselles_tauler * 0.25; var zombies_encontrados = 0;
-        //if mitad_zombies se activa zombies_totales / 2;
-        //if destapa zombie zombies_encontrados += 1;
- 
-        var pdobles_totales = 0; var pdobles_encontrados = 0;
-        // cuando haga el random para escoger que recompensas poner: pdobles_totales += 1;
-        // if destapa pdobles_encontrados += 1;
-
-        var vidaaextra_totales = 0; var vidaextra_encontrados = 0;
-        // cuando haga el random para escoger que recompensas poner: vidaaextra_totales += 1;
-        // if destapa vidaextra_encontrados += 1;
-
-        var mitadzombies_totales = 0; var mitadzombies_totales = 0;
-        // cuando haga el random para escoger que recompensas poner: mitadzombies_totales += 1;
-        // if destapa mitadzombies_totales += 1;
-
         //stats partidas ganadas:
         if(localStorage.getItem("ganadas") == null){
             ganadas = localStorage.setItem("ganadas", 0);
@@ -97,7 +99,7 @@ let partida = {
         let taula = "<div id='taulaCentral'>";
 
         for (let i = 1; i < this.mida_tauler + 1; i++) {
-            taula += "<div class='row'>";
+            taula += "<div>";
             for (let j = 1; j < this.mida_tauler + 1; j++) {
                     taula += "<div id='" + i + "," + j + "' onclick='clicar(this.id)'><img src='/img/cespedoculto.jpg'></div>";
             }
@@ -113,17 +115,17 @@ let partida = {
     cargarImagen: function(tipo){
         switch (tipo.toUpperCase){
             case 'Z':
-                return "img/zombie.png";
+                return '/img/zombie.png';
             case 'E':
-                return "img/estrella.png";
+                return '/img/estrella.png';
             case 'D':
-                return "img/doblepuntuacion.png";
+                return '/img/doblepuntuacion.png';
             case 'M':
-                return "img/mitadzombies.png";
+                return '/img/mitadzombies.png';
             case 'V':
-                return "img/vidaextra.png";
+                return '/img/vidaextra.png';
             case 'G':
-                return "img/cesped.jpg";
+                return '/img/cesped.jpg';
         }
     },
 
@@ -137,12 +139,10 @@ let partida = {
                 valorX--;
                 valorY--;
                 for (let i = 0; i < partida.doblePuntos.length; i++) {
-
-                    if (valorX == partida.doblePuntos[i].x && valorY == partida.doblePuntos[i].y) { //Si encuentra en esa posicion que tiene las mismas coordenadas que yo suma las estadisticas
-
+                    //Si encuentra en esa posicion que tiene las mismas coordenadas que yo suma las estadisticas
+                    if (valorX == partida.doblePuntos[i].x && valorY == partida.doblePuntos[i].y) { 
                         partida.doblesPuntosEncontrados++;
                         partida.doblePuntos[i].seleccionado = true;
-
                     }
                 }
 
