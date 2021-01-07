@@ -63,7 +63,7 @@ let partida = {
         
         
 
-        //stats partidas ganadas:
+        //Generamos el localStorage de ganadas, perdidas y abandonadas si no existen
         if(localStorage.getItem("ganadas") == null){
             this.ganadas = localStorage.setItem("ganadas", 0);
         }
@@ -74,9 +74,7 @@ let partida = {
         }
             else{this.perdidas = localStorage.getItem("perdidas");}
 
-        //estadistiques.innerHTML = "ganadas: " + ganadas + "<br> perdidas: " + perdidas;
 
-        //cuando se gane actualizar localStorage, IDEM con perdidas
 
     },
     
@@ -186,9 +184,9 @@ let partida = {
                 if (this.vidas == 0) {
                     alert("¡GAME OVER!");
                     setTimeout(function() {
-                        reiniciar();
                         this.perdidas++;
                         localStorage.setItem("perdidas", this.perdidas);
+                        reiniciar();
                     }, 1000);
                 }
 
@@ -203,9 +201,9 @@ let partida = {
                 if(partida.estrellas_encontrados==this.mida_tauler){
                     alert("¡You Win!");
                     setTimeout(function() {
-                        reiniciar();
                         this.ganadas++;
                         localStorage.setItem("ganadas", this.ganadas);
+                        reiniciar();
                     }, 1000);        
                 }
                 if (partida.casillaEscogidas<2){
@@ -482,6 +480,12 @@ let partida = {
 
     getTauler: function(){
         return this.tauler;
+    },
+
+    abandonar: function(){
+        partida.abandonadas+=1;
+        localStorage.setItem("abandonadas", partida.abandonadas);
+        reiniciar();
     },
 
     reinicio: function(){
