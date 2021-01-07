@@ -55,7 +55,7 @@ body{
 }
 
 #tabla{
-    max-width:200px;
+
     height: auto;
     width: auto;
     position: relative;
@@ -63,7 +63,13 @@ body{
 }
 
 #taulaGeneral{
+
+}
+
+#fila{
     display:flex;
 }
 
-
+.casilla{
+    flex: 1 1 0;
+}

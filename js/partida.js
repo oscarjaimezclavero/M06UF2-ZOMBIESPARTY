@@ -99,18 +99,18 @@ let partida = {
     }, 
 
     cargarImagen: function(tipo){
-        switch (tipo.toUpperCase){
-            case 'Z':
+        switch (tipo){
+            case 'z':
                 return '/img/zombie.png';
-            case 'E':
+            case 'e':
                 return '/img/estrella.png';
-            case 'D':
+            case 'd':
                 return '/img/doblepuntuacion.png';
-            case 'M':
+            case 'm':
                 return '/img/mitadzombies.png';
-            case 'V':
+            case 'v':
                 return '/img/vidaextra.png';
-            case 'G':
+            case 'g':
                 return '/img/cesped.jpg';
         }
     },
