@@ -239,7 +239,7 @@ let partida = {
                 this.estrelles.push(estrella);
             }
         // el catch sirve para que si hay alguna excepcion utilizara lo que haya en catch, que en este caso es "nada" y no hara nada
-        } catch (excepcion) {} 
+        } catch (excepcion) {console.log({excepcion})} 
     },
 
     crear_zombies: function() {
@@ -266,18 +266,43 @@ let partida = {
         this.crear_MitadZombie();
         this.crear_DoblePuntos();
 
-        while (this.recompensas_creadas < total) {
-            this.crear_VidaExtra();
-            this.crear_MitadZombie();
-            this.crear_DoblePuntos();
-        }
 
+        while (this.recompensas_creadas < total) {
+
+            const casillasLibres = total - this.recompensas_creadas;
+
+            const recompensas = [];
+
+           switch(true){
+                case casillasLibres > 2:
+                    recompensas.push("VidaExtra");
+                case casillasLibres > 1:
+                    recompensas.push("MitadZombie");
+                case casillasLibres > 0:
+                    recompensas.push("DoblePuntos")
+           }
+
+            let valor = Math.floor(Math.random()*recompensas.length)
+            console.log({valor,recompensas})
+
+            switch(recompensas[valor]){
+                case 'VidaExtra':
+                    this.crear_VidaExtra();
+                    break;
+                case 'DoblePuntos':
+                    this.crear_DoblePuntos();
+                    break;
+                case 'MitadZombie':
+                    this.crear_MitadZombie();
+                    break;
+            }
+        }
     },
 
     crear_DoblePuntos: function() {
 
         try {
-            var doblesPuntos = new DoblePuntuacion (1, 0);
+            var doblesPuntos = new DoblePuntuacion (0, 1);
             var x = 0,
                 y = 0;
             do {
@@ -297,7 +322,7 @@ let partida = {
 
         try {
             var orientacion = Math.floor(Math.random() * 2);
-            var mitad = new MitadZombies(2, orientacion);
+            var mitad = new MitadZombies(orientacion, 2);
             mitad.casillas = 0;
             if (orientacion == 0) {
                 var x = 0,
@@ -342,7 +367,7 @@ let partida = {
 
         try {
             var orientacion = Math.floor(Math.random() * 2);
-            var vida = new VidaExtra(3, orientacion);
+            var vida = new VidaExtra(orientacion, 3);
             vida.casillas = 0;
 
             if (orientacion == 0) {
@@ -352,7 +377,7 @@ let partida = {
                     x = Math.floor(Math.random() * this.mida_tauler);
                     y = Math.floor(Math.random() * this.mida_tauler);
 
-                } while (this.tauler[x][y] != "g" || this.tauler[x - 1][y] != "g" || this.tauler[x + 1][y] != "g" || x > this.tauler - 2 && x <= 0);
+                } while (this.tauler[x][y] != "g" || this.tauler[x - 1][y] != "g" || this.tauler[x + 1][y] != "g" || x < this.mida_tauler - 2 && x > 0);
 
                 vida.x = x;
                 vida.y = y;
@@ -369,7 +394,7 @@ let partida = {
                     x = Math.floor(Math.random() * this.mida_tauler);
                     y = Math.floor(Math.random() * this.mida_tauler);
 
-                } while (this.tauler[x][y] != "g" || this.tauler[x][y - 1] != "g" || this.tauler[x][y + 1] != "g" || y > this.tauler - 2 && y <= 0);
+                } while (this.tauler[x][y] != "g" || this.tauler[x][y - 1] != "g" || this.tauler[x][y + 1] != "g" || y < this.mida_tauler - 2 && y > 0);
 
                 vida.x = x;
                 vida.y = y;

@@ -1,4 +1,4 @@
-var DoblePuntuacion = function (posicion){
+var DoblePuntuacion = function (){
     //Herencia Recompensa.js
     Recompensa.apply(this, arguments);
 

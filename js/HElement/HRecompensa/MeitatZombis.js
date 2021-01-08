@@ -1,4 +1,4 @@
-var MitadZombies = function (posicion){
+var MitadZombies = function (){
     //Herencia recompensa.js
     Recompensa.apply(this, arguments);
     var casillas = 0;

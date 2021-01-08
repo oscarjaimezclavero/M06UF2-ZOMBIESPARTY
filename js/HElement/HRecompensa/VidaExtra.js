@@ -1,4 +1,4 @@
-var VidaExtra = function (posicion){
+var VidaExtra = function (){
     //Herencia Recompensa.js
     Recompensa.apply(this, arguments);
 
